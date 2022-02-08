@@ -21,9 +21,9 @@ except db.Error as error:
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
 """master window #1"""
-masterWindow = tk.Tk()
+m1 = tk.Tk()
 
-masterWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
+m1.geometry(f"{screenSize[0]}x{screenSize[1]}")
 
 
-masterWindow.tk.mainloop()
+m1.tk.mainloop()
