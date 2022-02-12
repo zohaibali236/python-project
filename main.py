@@ -1,4 +1,7 @@
-USE_SQL_SERVER = True
+from pickle import FALSE
+
+
+USE_SQL_SERVER = FALSE
 
 """Importing modules"""
 import tkinter as tk
