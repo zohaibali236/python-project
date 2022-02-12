@@ -1,6 +1,3 @@
-from pickle import FALSE
-
-
 USE_SQL_SERVER = FALSE
 
 """Importing modules"""
