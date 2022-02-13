@@ -1,10 +1,13 @@
-USE_SQL_SERVER = False
+USE_SQL_SERVER = True
 
 """Importing modules"""
-from tkinter import *
+from tkinter import*
 import ctypes
 from datetime import datetime
+from tkinter import messagebox
+from PIL import ImageTk
 """End of importing modules"""
+
 
 """Connecting to DB"""
 if(USE_SQL_SERVER):
@@ -14,10 +17,11 @@ if(USE_SQL_SERVER):
                     host = "localhost",
                     user = "root",
                     password = "",
-                    database = ""
+                    database = "mall"
         )
     except db.Error as error:
         print(error, datetime.now())
+
 else:
     import pyodbc
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
@@ -26,14 +30,18 @@ else:
 """Getting screen size"""
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
-"""master window #1"""
-m1 = tk.Tk()
+"""windows"""
+m1 = Tk()
+loginPage = Tk()
 
+
+"""window sizes"""
 m1.geometry(f"{screenSize[0]}x{screenSize[1]}")
+
 # cartscreen
 
    # labels
-orange_frame = Frame(m1, bg="orange", width=1524, height=788)
+orange_frame = Frame(m1, bg="orange", width=1524, height=screenSize[1])
 white_frame = Frame(m1, bg="white", width=1220, height=730)
 seller_label = Label(orange_frame, text="SELLER", bg="orange", fg="white", font=("aerial", 30))
 categories_label = Label(orange_frame, text="CATEGORIES", bg="orange", fg="white", font=("aerial", 30))
@@ -85,4 +93,43 @@ delete_button.place(x=650, y=270)
 clear_button.place(x=850, y=270)
 product_list.place(x=475, y=350)
 
-m1.tk.mainloop()
+
+
+class loginWindow:
+    def __init__(self, loginpage):
+
+        self.loginpage = loginpage
+        self.loginpage.title("Login")
+        self.loginpage.configure(bg="white")
+        self.loginpage.geometry(f"{screenSize[0]}x{screenSize[1]}")
+
+        self.backgroundimage = ImageTk.PhotoImage(file=r"images\icon.jpg", master = self.loginpage)
+        Label(self.loginpage, image=self.backgroundimage, bd=0).pack(side=TOP)
+
+        Frame(self.loginpage, width = 340, height=338, bd=0, bg="pink").place(x = 550, y = 350)
+
+        Label(self.loginpage, text="User Name", bd = 0, bg = "green", width=10).place(x=696, y=400, anchor="center")
+
+        self.e1 = Entry(self.loginpage)
+        self.e1.place(x=722, y=420, anchor="center")
+
+        Label(self.loginpage, text="Password", width=10, bg="green").place(x=698, y=450, anchor="center")
+
+        self.e2 = Entry(self.loginpage, show="*")
+        self.e2.place(x=722, y=472, anchor="center")
+
+        Button(self.loginpage, text="Login", command=self.login, bg="blue", width=10).place(x=712, y=510, anchor="center")
+
+    
+    def login(self):
+        print(self.e1.get())
+        mysql_query = dbHandle.cursor(dictionary = True, buffered = True)
+
+        mysql_query.execute(f"SELECT * FROM `USERS` WHERE `NAME` = '{self.e1.get()}' AND `PASSWORD` = '{self.e2.get()}'")
+
+        if(not mysql_query.rowcount): return messagebox.showerror("Error!", "Invalid Credentials\nPlease try again!")
+
+        
+
+loginWindow(loginPage)
+m1.mainloop()

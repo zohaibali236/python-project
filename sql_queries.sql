@@ -1,5 +1,12 @@
 CREATE TABLE `shops` ( 
-    `ID` TINYINT(100) NOT NULL , 
-    `ShopName` VARCHAR(256) NOT NULL , 
-    PRIMARY KEY (`ID`)
+     `ID` TINYINT(100) NOT NULL , 
+     `ShopName` VARCHAR(32) NOT NULL , 
+     PRIMARY KEY (`ID`)
+    ) ENGINE = InnoDB;
+
+    CREATE TABLE `users` ( 
+     `ID` TINYINT(5) NOT NULL AUTO_INCREMENT ,
+     `NAME` VARCHAR(16) NOT NULL , 
+     `PASSWORD` VARCHAR(8) NOT NULL , 
+     PRIMARY KEY (`ID`)
     ) ENGINE = InnoDB;
