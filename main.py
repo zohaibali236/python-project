@@ -99,10 +99,15 @@ product_lis = Label(white_frame, text="PRODUCTS LIST", bg="white", fg="orange", 
 
 
 # creating combo box
-categories = ["Grocery", "Beverage", "Clothes", "Technology", "Foot wear", "Jewellery", "toys",
-              "Watches", "Electronic Appliances"]
+cur.execute("select shopname from shops")
+shops = cur.fetchall()
+categories = []
+for i in range(len(shops)):
+    a = list(shops[i])
+    categories.extend(a)
 combo_box = ttk.Combobox(white_frame, value=categories, width=22)
-combo_box.insert(0, "Select")
+combo_box.insert(0, "Type")
+
 
 
 # creating and placing treeview
