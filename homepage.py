@@ -1,7 +1,6 @@
 from tkinter import  *
 from PIL import Image , ImageTk
 from tkinter import ttk
-import tkinter as tk
 import ctypes
 
 from loginpage import ShowLoginPage
@@ -33,19 +32,19 @@ l1= Label(homepagewindow,text="Elegante Shopping Mall" , bg="black", fg="white",
 l1.pack()
 #buttons
 p1=PhotoImage(file=r'images\2.png')
-b1=tk.Button(homepagewindow,image=p1,bg="DodgerBlue4",height=100,width=250, command=loginPageinit)
+b1=Button(homepagewindow,image=p1,bg="DodgerBlue4",height=100,width=250, command=loginPageinit)
 b1.place(x=270,y=100)
 
 p2=PhotoImage(file=r'images\tg1.png')
-b2=tk.Button(homepagewindow,image=p2,bg="DarkGoldenrod2",height=100,width=250)
+b2=Button(homepagewindow,image=p2,bg="DarkGoldenrod2",height=100,width=250)
 b2.place(x=530,y=100)
 
 p3=PhotoImage(file=r'images\a1.png')
-b3=tk.Button(homepagewindow,image=p3,bg="white",height=100,width=250,)
+b3=Button(homepagewindow,image=p3,bg="white",height=100,width=250,)
 b3.place(x=790,y=100)
 
 p4=PhotoImage(file=r'images\c1.png')
-b4=tk.Button(homepagewindow,image=p4,bg="white",height=100,width=250)
+b4=Button(homepagewindow,image=p4,bg="white",height=100,width=250)
 b4.place(x=1050,y=100)
 
 homepagewindow.mainloop()

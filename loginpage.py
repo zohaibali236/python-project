@@ -5,6 +5,8 @@ from PIL import ImageTk
 import mysql.connector as db
 import ctypes
 
+from cpanel import showCpanel
+
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
@@ -19,17 +21,20 @@ try:
         )
 except db.Error as error: print(error, datetime.now())
 
+def cPanelinit():
+    loginPage.destroy()
+    dbHandle.close()
+    showCpanel()
 
 def login():
-    print(UserName.get())
     mysql_query = dbHandle.cursor(dictionary = True, buffered = True)
 
     mysql_query.execute(f"SELECT * FROM `USERS` WHERE `NAME` = '{UserName.get()}' AND `PASSWORD` = '{password.get()}'")
+    mysql_query.close()
 
     if(not mysql_query.rowcount): return messagebox.showerror("Error!", "Invalid Credentials\nPlease try again!")
 
-    print(mysql_query.fetchall())
-    loginPage.destroy()
+    cPanelinit()
 
 def ShowLoginPage():
 
