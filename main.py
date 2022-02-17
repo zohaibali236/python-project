@@ -155,7 +155,7 @@ def display():
     cur4 = dbHandle.cursor()
     global val
     global all_data
-    cur4.execute(f"select * from {val}")
+    cur4.execute(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
     all_data = cur4.fetchall()
     for row in product_list.get_children():
         product_list.delete(row)
@@ -170,24 +170,23 @@ def display():
         else:
             product_list.insert(parent='', index='end', iid=j, values=(id, name, qty, pr), tags=("odd",))
         j += 1
-    #row colors in treeview
     product_list.tag_configure("even", foreground="black", background="gray82")
     product_list.tag_configure("odd", foreground="black", background="white")
-    
     dbHandle.close()
-    
-    
+
 def add():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
                               r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
     cur1 = dbHandle.cursor()
     global val
-    cur1.execute(f"insert into {val}(pid,pname,pquantity,price) "
-                f"values('{var_id.get()}','{var_name.get()}','{var_quantity.get()}','{var_price.get()}')")
+    # cur1.execute(f"if not exists(table pan) create table pan (pid varchar(255) PRIMARY KEY,pname varchar(255),pquantity INT,price INT)")
+    cur1.execute(f"insert into shopdata(pid,pname,pquantity,price,category) "
+                f"values('{var_id.get()}','{var_name.get()}','{var_quantity.get()}','{var_price.get()}','{val}')")
 
     dbHandle.commit()
     dbHandle.close()
     display()
+
 
 def edit():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
@@ -200,17 +199,16 @@ def edit():
     dbHandle.commit()
     dbHandle.close()
     display()
-    
-    
+
+
 def delete():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
                               r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
     cur3 = dbHandle.cursor()
-    cur3.execute(f"delete from {val} where pid='{var_id.get()}'")
+    cur3.execute(f"delete from shopdata where pid='{var_id.get()}' AND category='{val}'")
     dbHandle.commit()
     dbHandle.close()
     display()
-    
 
 
    # buttons
