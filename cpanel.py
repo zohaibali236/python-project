@@ -1,12 +1,17 @@
 from tkinter import *
 import ctypes
 from manageshop import showManageShop
+from manageitem import showItemManage
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
 def manageShopInit():
     Cpanel.destroy()
     showManageShop()
+
+def manageItemInit():
+    Cpanel.destroy()
+    showItemManage()
 
 def showCpanel():
     global Cpanel
@@ -19,7 +24,7 @@ def showCpanel():
     itemsIcon = PhotoImage(file=r"images\itemsicon.png")
 
     shops_button = Button(frame, image=shopIcon, bg="orange", fg="white", activebackground="orange", command = manageShopInit)
-    items_button = Button(frame, image=itemsIcon, bg="orange", fg="white", activebackground="orange")
+    items_button = Button(frame, image=itemsIcon, bg="orange", fg="white", activebackground="orange", command = manageItemInit)
 
 
     frame.place(x = 0, y = 0)

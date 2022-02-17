@@ -2,6 +2,12 @@ from tkinter import*
 from tkinter import ttk
 from tkinter import messagebox
 import mysql.connector as db
+import ctypes
+
+
+
+screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
+
 
 dbHandle = db.connect(
       host = "localhost",
@@ -9,6 +15,11 @@ dbHandle = db.connect(
       password = "",
       database = "mall"
       )
+
+def logout():
+   from loginpage import ShowLoginPage
+   manageShopWindow.destroy()
+   ShowLoginPage()
 
 def add():
    if(shopName.get() == "" or shopRent.get() == "" or shopLoc.get() == ""):
@@ -51,6 +62,7 @@ def delete():
    mysql_query = dbHandle.cursor(buffered=True)
    mysql_query.execute(f"DELETE FROM `shops` WHERE `ID` = '{shopID.get()}'")
    messagebox.showinfo("Information", f"{mysql_query.rowcount} Rows affected")
+   dbHandle.commit()
    mysql_query.close()
    display()
 
@@ -72,6 +84,8 @@ def showManageShop():
 
    global manageShopWindow
    manageShopWindow = Tk()
+
+   manageShopWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
 
    global shopID, shopName, shopRent, shopLoc
 
@@ -107,7 +121,7 @@ def showManageShop():
 
    shops.place(x=426, y=460)
 
-   logout_button = Button(orange_frame, text="Logout", bg="orange", fg="white", font=("aerial", 13, "italic"))
+   logout_button = Button(orange_frame, text="Logout", bg="orange", fg="white", font=("aerial", 13, "italic"), command = logout)
    add_button = Button(white_frame, text="ADD", bg="orange", fg="white", width=7, height=1,
                         font=("aerial", 15, "italic"), command=add)
    edit_button = Button(white_frame, text="EDIT", bg="orange", fg="white", width=7, height=1,

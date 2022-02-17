@@ -11,16 +11,6 @@ from cpanel import showCpanel
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
     
-    
-try:
-    dbHandle = db.connect(
-            host = "localhost",
-            user = "root",
-            password = "",
-            database = "mall"
-        )
-except db.Error as error: print(error, datetime.now())
-
 def cPanelinit():
     loginPage.destroy()
     dbHandle.close()
@@ -37,6 +27,16 @@ def login():
     cPanelinit()
 
 def ShowLoginPage():
+    global dbHandle
+    try:
+        dbHandle = db.connect(
+                host = "localhost",
+                user = "root",
+                password = "",
+                database = "mall"
+            )
+    except db.Error as error: print(error, datetime.now())
+
 
     global loginPage
     loginPage = Tk()
