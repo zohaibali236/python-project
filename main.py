@@ -314,7 +314,6 @@ def add():
                               r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
     cur1 = dbHandle.cursor()
     global val
-    # cur1.execute(f"if not exists(table pan) create table pan (pid varchar(255) PRIMARY KEY,pname varchar(255),pquantity INT,price INT)")
     cur1.execute(f"insert into shopdata(pid,pname,pquantity,price,category) "
                 f"values('{var_id.get()}','{var_name.get()}','{var_quantity.get()}','{var_price.get()}','{val}')")
 
