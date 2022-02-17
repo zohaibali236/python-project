@@ -25,7 +25,7 @@ if(USE_SQL_SERVER):
 else:
     import pyodbc
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-                          r'DBQ=C:\Users\Xmart\Documents\Calculator.accdb;')
+                          r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
 
 """Getting screen size"""
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
