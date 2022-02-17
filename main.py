@@ -193,7 +193,7 @@ def edit():
                               r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
     cur2 = dbHandle.cursor()
     global val
-    cur2.execute(f"update {val} set pname='{var_name.get()}',"
+    cur2.execute(f"update shopdata set pname='{var_name.get()}',"
                 f" pquantity='{var_quantity.get()}', price='{var_price.get()}' where pid='{var_id.get()}'")
 
     dbHandle.commit()
