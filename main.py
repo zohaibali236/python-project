@@ -5,6 +5,7 @@ from tkinter import*
 import ctypes
 from datetime import datetime
 from tkinter import messagebox
+from tkinter import ttk
 from PIL import ImageTk
 """End of importing modules"""
 
@@ -99,6 +100,7 @@ product_lis = Label(white_frame, text="PRODUCTS LIST", bg="white", fg="orange", 
 
 
 # creating combo box
+cur = dbHandle.cursor()
 cur.execute("select shopname from shops")
 shops = cur.fetchall()
 categories = []
@@ -261,44 +263,3 @@ combo_box.bind("<KeyRelease>", search)
 
 m1.mainloop()
 
-from tkinter import  *
-from PIL import Image , ImageTk
-from tkinter import ttk
-import tkinter as tk
-
-m = Tk()
-m.title("Elegante Shopping Mall")
-m.geometry("2000x2000")
-
-image = Image.open("C:\\Users\\pc\Desktop\\title.jpg")
-imagenew = ImageTk.PhotoImage(image)
-imagelabel = Label(m, image=imagenew)
-imagelabel.place(x=0,y=0)
-#logo
-f1=Frame(m)
-f1.place(x=10,y=10,width=260,height=250)
-logo = PhotoImage(file='C:\\Users\\pc\\Desktop\\my.png')
-label = ttk.Label(f1, image = logo)
-PhotoImage(file='C:\\Users\\pc\\Desktop\\my.png')
-label.pack()
-#text
-l1= Label(m,text="Elegante Shopping Mall" , bg="black", fg="white",padx=15, pady=15,font=("Segoe Script",25,"bold"))
-l1.pack()
-#buttons
-p1=PhotoImage(file='C:\\Users\\pc\\Desktop\\2.png')
-b1=tk.Button(m,image=p1,bg="DodgerBlue4",height=100,width=250)
-b1.place(x=270,y=100)
-
-p2=PhotoImage(file='C:\\Users\\pc\\Desktop\\tg1.png')
-b2=tk.Button(m,image=p2,bg="DarkGoldenrod2",height=100,width=250)
-b2.place(x=530,y=100)
-
-p3=PhotoImage(file='C:\\Users\\pc\\Desktop\\a1.png')
-b3=tk.Button(m,image=p3,bg="white",height=100,width=250,command=about)
-b3.place(x=790,y=100)
-
-p4=PhotoImage(file='C:\\Users\\pc\\Desktop\\c1.png')
-b4=tk.Button(m,image=p4,bg="white",height=100,width=250)
-b4.place(x=1050,y=100)
-
-m.mainloop()
