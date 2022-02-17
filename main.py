@@ -163,9 +163,15 @@ def display():
         name = i[1]
         qty = i[2]
         pr = i[3]
-        product_list.insert(parent='', index='end', iid=j, values=(id, name, qty, pr))
+        if j % 2 == 0:
+            product_list.insert(parent='', index='end', iid=j, values=(id, name, qty, pr),tags=("even",))
+        else:
+            product_list.insert(parent='', index='end', iid=j, values=(id, name, qty, pr), tags=("odd",))
         j += 1
-
+    #row colors in treeview
+    product_list.tag_configure("even", foreground="black", background="gray82")
+    product_list.tag_configure("odd", foreground="black", background="white")
+    
     dbHandle.close()
     
     
