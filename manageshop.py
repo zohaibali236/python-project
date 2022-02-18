@@ -16,6 +16,13 @@ dbHandle = db.connect(
       database = "mall"
       )
 
+   
+def back():
+   manageShopWindow.destroy()
+   from cpanel import showCpanel
+   showCpanel()
+
+
 def logout():
    from loginpage import ShowLoginPage
    manageShopWindow.destroy()
@@ -95,15 +102,15 @@ def showManageShop():
    shopRent= StringVar()
    shopLoc = StringVar()
 
-   orange_frame = Frame(manageShopWindow, bg="orange", width=1524, height=900)
+   orange_frame = Frame(manageShopWindow, bg="#febe53", width=1524, height=900)
    white_frame = Frame(manageShopWindow, bg="white", width=1220, height=730)
    black_frame = Frame(manageShopWindow, bg="grey", width=1025, height=310 )
-   manage_shops = Label(white_frame, text="MANAGE SHOPS", bg="white", fg="orange", font=("aerial", 25, "bold"))
-   id = Label(white_frame, text="SHOP ID", bg="white", fg="orange", font=("aerial", 15, "bold"))
-   name = Label(white_frame, text="NAME", bg="white", fg="orange", font=("aerial", 15, "bold"))
-   rent = Label(white_frame, text="RENT", bg="white", fg="orange", font=("aerial", 15, "bold"))
-   location = Label(white_frame, text="LOCATION", bg="white", fg="orange", font=("aerial", 15, "bold"))
-   shops_label = Label(white_frame, text="SHOPS LIST", bg="white", fg="orange", font=("aerial", 25, "bold"))
+   manage_shops = Label(white_frame, text="MANAGE SHOPS", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
+   id = Label(white_frame, text="SHOP ID", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+   name = Label(white_frame, text="NAME", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+   rent = Label(white_frame, text="RENT", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+   location = Label(white_frame, text="LOCATION", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+   shops_label = Label(white_frame, text="SHOPS LIST", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
 
    global shops
    col = ("sID", "sName", "sRent", "sLoc")
@@ -122,14 +129,15 @@ def showManageShop():
 
    shops.place(x=426, y=460)
 
-   logout_button = Button(orange_frame, text="Logout", bg="orange", fg="white", font=("aerial", 13, "italic"), command = logout)
-   add_button = Button(white_frame, text="ADD", bg="orange", fg="white", width=7, height=1,
+   back_button = Button(orange_frame, text="Back", bg="#febe53", fg="white", font=("aerial", 13, "italic"), command = back)
+   logout_button = Button(orange_frame, text="Logout", bg="#febe53", fg="white", font=("aerial", 13, "italic"), command = logout)
+   add_button = Button(white_frame, text="ADD", bg="#febe53", fg="white", width=7, height=1,
                         font=("aerial", 15, "italic"), command=add)
-   edit_button = Button(white_frame, text="EDIT", bg="orange", fg="white", width=7, height=1,
+   edit_button = Button(white_frame, text="EDIT", bg="#febe53", fg="white", width=7, height=1,
                            font=("aerial", 15, "italic"), command=lambda: edit(0))
-   delete_button = Button(white_frame, text="DELETE", bg="orange", fg="white", width=7, height=1,
+   delete_button = Button(white_frame, text="DELETE", bg="#febe53", fg="white", width=7, height=1,
                            font=("aerial", 15, "italic"), command=delete)
-   display_button = Button(white_frame, text="DISPLAY", bg="orange", fg="white", width=7, height=1,
+   display_button = Button(white_frame, text="DISPLAY", bg="#febe53", fg="white", width=7, height=1,
                            font=("aerial", 15, "italic"), command=display)
    id_entry = Entry(white_frame, bg="white", textvariable=shopID, bd=3, width=25)
    name_entry = Entry(white_frame, bg="white", textvariable=shopName, bd=3, width=25)
@@ -154,5 +162,6 @@ def showManageShop():
    delete_button.place(x=650, y=270)
    display_button.place(x=850, y=270)
    shops_label.place(x=475, y=350)
+   back_button.place(x=150, y=690)
 
    manageShopWindow.mainloop()

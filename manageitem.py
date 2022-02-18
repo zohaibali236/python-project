@@ -4,7 +4,10 @@ import pyodbc
 import ctypes
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
-
+def back():
+    m1.destroy()
+    from cpanel import showCpanel
+    showCpanel()
 
 def logout():
    from loginpage import ShowLoginPage
@@ -101,18 +104,18 @@ def showItemManage():
 
     # shops items management screen
     # labels
-    orange_frame = Frame(m1, bg="orange", width=1524, height=screenSize[1])
+    orange_frame = Frame(m1, bg="#febe53", width=1524, height=screenSize[1])
     white_frame = Frame(m1, bg="white", width=1220, height=730)
     black_frame = Frame(m1, bg="grey", width=1025, height=310 )
-    seller_label = Label(orange_frame, text="SELLER", bg="orange", fg="white", font=("aerial", 30))
-    categories_label = Label(orange_frame, text="CATEGORIES", bg="orange", fg="white", font=("aerial", 30))
-    manage_products = Label(white_frame, text="MANAGE PRODUCTS", bg="white", fg="orange", font=("aerial", 25, "bold"))
-    id = Label(white_frame, text="ProductID", bg="white", fg="orange", font=("aerial", 15, "bold"))
-    name = Label(white_frame, text="NAME", bg="white", fg="orange", font=("aerial", 15, "bold"))
-    quantity = Label(white_frame, text="QUANTITY", bg="white", fg="orange", font=("aerial", 15, "bold"))
-    price = Label(white_frame, text="PRICE", bg="white", fg="orange", font=("aerial", 15, "bold"))
-    category = Label(white_frame, text="CATEGORY", bg="white", fg="orange", font=("aerial", 15, "bold"))
-    product_lis = Label(white_frame, text="PRODUCTS LIST", bg="white", fg="orange", font=("aerial", 25, "bold"))
+    seller_label = Label(orange_frame, text="SELLER", bg="#febe53", fg="white", font=("aerial", 30))
+    categories_label = Label(orange_frame, text="CATEGORIES", bg="#febe53", fg="white", font=("aerial", 30))
+    manage_products = Label(white_frame, text="MANAGE PRODUCTS", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
+    id = Label(white_frame, text="ProductID", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+    name = Label(white_frame, text="NAME", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+    quantity = Label(white_frame, text="QUANTITY", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+    price = Label(white_frame, text="PRICE", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+    category = Label(white_frame, text="CATEGORY", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+    product_lis = Label(white_frame, text="PRODUCTS LIST", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
 
 
     # try:
@@ -152,14 +155,16 @@ def showItemManage():
     product_list.place(x=426, y=460)
 
     # buttons
-    logout_button = Button(orange_frame, text="Logout", bg="orange", fg="white", font=("aerial", 13, "italic"), command = logout)
-    add_button = Button(white_frame, text="ADD", bg="orange", fg="white", width=7, height=1,
+    back_button = Button(orange_frame, text="Back", bg="#febe53", fg="white", font=("aerial", 13, "italic"), command = back)
+
+    logout_button = Button(orange_frame, text="Logout", bg="#febe53", fg="white", font=("aerial", 13, "italic"), command = logout)
+    add_button = Button(white_frame, text="ADD", bg="#febe53", fg="white", width=7, height=1,
                         font=("aerial", 15, "italic"), command=add)
-    edit_button = Button(white_frame, text="EDIT", bg="orange", fg="white", width=7, height=1,
+    edit_button = Button(white_frame, text="EDIT", bg="#febe53", fg="white", width=7, height=1,
                             font=("aerial", 15, "italic"), command=edit)
-    delete_button = Button(white_frame, text="DELETE", bg="orange", fg="white", width=7, height=1,
+    delete_button = Button(white_frame, text="DELETE", bg="#febe53", fg="white", width=7, height=1,
                             font=("aerial", 15, "italic"), command=delete)
-    clear_button = Button(white_frame, text="DISPLAY", bg="orange", fg="white", width=7, height=1,
+    clear_button = Button(white_frame, text="DISPLAY", bg="#febe53", fg="white", width=7, height=1,
                             font=("aerial", 15, "italic"), command=display)
 
 
@@ -195,6 +200,7 @@ def showItemManage():
     delete_button.place(x=650, y=270)
     clear_button.place(x=850, y=270)
     product_lis.place(x=475, y=350)
+    back_button.place(x=150, y=690)
     # combo_box.place(x=236, y=214)
     # combo_box.bind("<KeyRelease>", search)
 

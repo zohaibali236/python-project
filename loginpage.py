@@ -9,7 +9,11 @@ import ctypes
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
-    
+def back():
+    loginPage.destroy()
+    from homepage import Showhomepage
+    Showhomepage()
+
 def cPanelinit():
     from cpanel import showCpanel
     loginPage.destroy()
@@ -48,6 +52,8 @@ def ShowLoginPage():
     loginPage.configure(bg = "white")
     loginPage.geometry(f"{screenSize[0]}x{screenSize[1]}")
     loginPage.resizable(0,0)
+
+    Button(loginPage, text="Back", bg="#febe53", fg="white", font=("aerial", 13, "italic"), command = back).place(x=150, y=690)
 
     global UserName
     UserName = Entry(loginPage, bd = 0, bg="white", font=("Open Sans Extra Bold", 12))
