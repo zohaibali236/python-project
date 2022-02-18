@@ -3,18 +3,20 @@ from PIL import Image , ImageTk
 from tkinter import ttk
 import ctypes
 
-from loginpage import ShowLoginPage
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
 
 def loginPageinit():
+    from loginpage import ShowLoginPage
     homepagewindow.destroy()
     ShowLoginPage()
 
 homepagewindow = Tk()
 homepagewindow.title("Elegante Shopping Mall")
 homepagewindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
+homepagewindow.resizable(0,0)
+
 
 image = Image.open(r"images\title.jpg")
 imagenew = ImageTk.PhotoImage(image)

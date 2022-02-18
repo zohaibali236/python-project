@@ -5,13 +5,13 @@ from PIL import ImageTk
 import mysql.connector as db
 import ctypes
 
-from cpanel import showCpanel
 
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
     
 def cPanelinit():
+    from cpanel import showCpanel
     loginPage.destroy()
     dbHandle.close()
     showCpanel()
@@ -41,26 +41,21 @@ def ShowLoginPage():
     global loginPage
     loginPage = Tk()
     loginPage.title("Login")
-    loginPage.configure(bg="white")
+    bgimg = ImageTk.PhotoImage(file=r"images\loginPage.png", master = loginPage)
+    
+    Label(loginPage, image=bgimg).pack()
+
+    loginPage.configure(bg = "white")
     loginPage.geometry(f"{screenSize[0]}x{screenSize[1]}")
-
-    backgroundimage = ImageTk.PhotoImage(file=r"images\icon.jpg", master = loginPage)
-    Label(loginPage, image=backgroundimage, bd=0).pack(side=TOP)
-
-    Frame(loginPage, width = 340, height=338, bd=0, bg="pink").place(x = 550, y = 350)
-
-    Label(loginPage, text="User Name", bd = 0, bg = "green", width=10).place(x=696, y=400, anchor="center")
+    loginPage.resizable(0,0)
 
     global UserName
-    UserName = Entry(loginPage)
-    UserName.place(x=722, y=420, anchor="center")
-
-    Label(loginPage, text="Password", width=10, bg="green").place(x=698, y=450, anchor="center")
+    UserName = Entry(loginPage, bd = 0, bg="white", font=("Open Sans Extra Bold", 12))
+    UserName.place(x=321, y=411, height=20, width=167)
 
     global password
-    password = Entry(loginPage, show="*")
-    password.place(x=722, y=472, anchor="center")
+    password = Entry(loginPage, show="*", bg="white", bd=0, font=("Open Sans Extra Bold", 12))
+    password.place(x=321, y=468, height=20, width=167)
 
-    Button(loginPage, text="Login", command=login, bg="blue", width=10).place(x=712, y=510, anchor="center")
+    Button(loginPage, text="Login", command=login, bd=1, bg="white",font=("Open Sans Extra Bold", 12)).place(x=400, y=525, anchor="center")
     loginPage.mainloop()
-

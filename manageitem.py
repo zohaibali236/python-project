@@ -90,6 +90,8 @@ def showItemManage():
     global m1
     m1 = Tk()
 
+    m1.geometry(f"{screenSize[0]}x{screenSize[1]}")
+
     global var_id, var_name, var_price, var_quantity
     var_id = StringVar()
     var_name = StringVar()

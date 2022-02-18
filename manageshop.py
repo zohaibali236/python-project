@@ -86,6 +86,7 @@ def showManageShop():
    manageShopWindow = Tk()
 
    manageShopWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
+   manageShopWindow.resizable(0,0)
 
    global shopID, shopName, shopRent, shopLoc
 
