@@ -24,7 +24,7 @@ def Showhomepage():
     homepagewindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
     homepagewindow.resizable(0,0)
 
-    image = Image.open(r"images\title.jpg")
+    image = Image.open(r"images\title (5).jpg")
     imagenew = ImageTk.PhotoImage(image)
     imagelabel = Label(homepagewindow, image=imagenew)
     imagelabel.place(x=0,y=0)
