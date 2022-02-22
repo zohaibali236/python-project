@@ -16,10 +16,8 @@ def logout():
 
 def search(event):
     global val
-    global combo_box
-    global cate
-    global categories
     val = event.widget.get()
+
     if val == "":
         combo_box['value'] = categories
     else:
@@ -29,13 +27,12 @@ def search(event):
                 data.append(categ)
         combo_box['value'] = data
 
-  
+
     
 def display():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
                               r'DBQ=.\shopping mall.accdb;')
     cur4 = dbHandle.cursor()
-    global val
     global all_data
     cur4.execute(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
     all_data = cur4.fetchall()
@@ -91,6 +88,15 @@ def delete():
     dbHandle.close()
     display()
 
+def updateForEdit(treeview):
+    current = product_list.focus()
+    currentItem = product_list.item(current)
+    currentItem = currentItem["values"]
+
+    var_id.set(currentItem[0])
+    var_name.set(currentItem[1])
+    var_quantity.set(currentItem[2])
+    var_price.set(currentItem[3])
 
 def showItemManage():
     global m1
@@ -130,10 +136,12 @@ def showItemManage():
     cur = dbHandle.cursor()
     cur.execute("select sName from shops")
     shops = cur.fetchall()
+    global categories
     categories = []
     for i in range(len(shops)):
         a = list(shops[i])
         categories.extend(a)
+    global combo_box
     combo_box = ttk.Combobox(white_frame, value=categories, width=22)
     combo_box.insert(0, "Type")
 
@@ -205,6 +213,10 @@ def showItemManage():
     product_lis.place(x=475, y=350)
     back_button.place(x=150, y=690)
     combo_box.place(x=236, y=214)
+    combo_box.bind("<<ComboboxSelected>>", search)
     combo_box.bind("<KeyRelease>", search)
-
+    product_list.bind("<Double-Button-1>", updateForEdit)
+    
     m1.mainloop()
+
+showItemManage()
