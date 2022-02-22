@@ -1,20 +1,15 @@
 from tkinter import*
 from tkinter import ttk
 from tkinter import messagebox
-import mysql.connector as db
+# import mysql.connector as db
 import ctypes
+import pyodbc
 
 
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
 
-dbHandle = db.connect(
-      host = "localhost",
-      user = "root",
-      password = "",
-      database = "mall"
-      )
 
    
 def back():
@@ -32,60 +27,66 @@ def add():
    if(shopName.get() == "" or shopRent.get() == "" or shopLoc.get() == ""):
       return messagebox.showerror("Error!", "Fields cannot be empty")
 
-   mysql_query = dbHandle.cursor(buffered=True)
-   mysql_query.execute(f"INSERT INTO `shops` (`Name`, `Rent`, `Location`) VALUES ('{shopName.get()}', {shopRent.get()}, '{shopLoc.get()}')")
+   dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+                              r'DBQ=.\shopping mall.accdb;')
+
+   cur1 = dbHandle.cursor()
+   cur1.execute(f"INSERT INTO shops (sID, sName, sLoc, sRent) VALUES('{shopID.get()}', '{shopName.get()}', '{shopRent.get()}', '{shopLoc.get()}')")
    dbHandle.commit()
-   messagebox.showinfo("Information", f"{mysql_query.rowcount} Rows affected")
-   mysql_query.close()
+   # messagebox.showinfo("Information", f"{cur1.rowcount} Rows affected")
+   dbHandle.close()
    display()
 
-def edit(step):
-   if(step == 0):
-      if(shopID.get() == ""): return messagebox.showerror("Error!", "ID cannot be empty")
-      elif(shopName.get() == "" or shopRent.get() == "" or shopLoc.get() == ""):
-         edit(1)
-      else: edit(2)
-   elif(step == 1):
-         if(shopName.get() == "" or shopRent.get() == "" or shopLoc.get() == ""):
-            mysql_query = dbHandle.cursor(dictionary = True, buffered = True)
-            mysql_query.execute(f"SELECT `Name`, `Rent`, `Location` FROM `shops` WHERE ID = '{shopID.get()}'")
-
-            cache_result = mysql_query.fetchall()
-            cache_result = cache_result[0]
-
-            if(shopName.get() == ""): shopName.set(cache_result["Name"])
-            if(shopRent.get() == ""): shopRent.set(cache_result["Rent"])
-            if(shopLoc.get() == ""): shopLoc.set(cache_result["Location"])
-   elif(step == 2):
-      mysql_query = dbHandle.cursor(buffered=True)
-      mysql_query.execute(f"UPDATE `shops` SET `Name`='{shopName.get()}', `Rent`='{shopRent.get()}', `Location`='{shopLoc.get()}' WHERE `ID`='{shopID.get()}'")
-      dbHandle.commit()
-      messagebox.showinfo("Information", f"{mysql_query.rowcount} Rows affected")
-      mysql_query.close()
-      display()
+def edit():
+   dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+                              r'DBQ=.\shopping mall.accdb;')
+   cur2 = dbHandle.cursor()
+   global val
+   cur2.execute(f"update shops set pname='{shopName.get()}',"
+                f" pLoc='{shopLoc.get()}', pRent='{shopRent.get()}' where pid='{shopID.get()}'")
+   # messagebox.showinfo("Information", f"{cur2.rowcount} Rows affected")
+   dbHandle.commit()
+   dbHandle.close()
+   display()
+  
       
 def delete():
    if(shopID.get() == ""): return messagebox.showerror("Error!", "ID cannot be empty")
-   mysql_query = dbHandle.cursor(buffered=True)
-   mysql_query.execute(f"DELETE FROM `shops` WHERE `ID` = '{shopID.get()}'")
-   messagebox.showinfo("Information", f"{mysql_query.rowcount} Rows affected")
+   dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+                              r'DBQ=.\shopping mall.accdb;')
+   cur3 = dbHandle.cursor()
+   cur3.execute(f"DELETE FROM shops WHERE sID = '{shopID.get()}'")
+   # messagebox.showinfo("Information", f"{cur3.rowcount} Rows affected")
    dbHandle.commit()
-   mysql_query.close()
+   dbHandle.close()
    display()
 
 def display():
-   mysql_query = dbHandle.cursor(buffered=True)
-   mysql_query.execute("SELECT * FROM `shops`")
+   dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+                              r'DBQ=.\shopping mall.accdb;')
+   cur4 = dbHandle.cursor()
+   cur4.execute("SELECT * FROM shops ORDER BY `sID` ASC")
    
    for rows in shops.get_children():
       shops.delete(rows)
 
-   if(not mysql_query.rowcount): return messagebox.showerror("Error!", "No data found to be displayed")
-
-   fetch = mysql_query.fetchall()
-   for i in fetch:
-      shops.insert('', END, values=i)
-   mysql_query.close()
+   # if(not dbHandle.rowcount): return messagebox.showerror("Error!", "No data found to be displayed")
+   all_data = cur4.fetchall()
+   
+   j=0
+   for i in all_data:
+        id = i[0]
+        name = i[1]
+        loc = i[2]
+        rent = i[3]
+        if j % 2 == 0:
+            shops.insert(parent='', index='end', iid=j, values=(id, name, loc, rent),tags=("even",))
+        else:
+            shops.insert(parent='', index='end', iid=j, values=(id, name, loc, rent), tags=("odd",))
+        j += 1
+   shops.tag_configure("even", foreground="black", background="gray82")
+   shops.tag_configure("odd", foreground="black", background="white")
+   dbHandle.close()
 
 def showManageShop():
 
@@ -134,11 +135,12 @@ def showManageShop():
    add_button = Button(white_frame, text="ADD", bg="#febe53", fg="white", width=7, height=1,
                         font=("aerial", 15, "italic"), command=add)
    edit_button = Button(white_frame, text="EDIT", bg="#febe53", fg="white", width=7, height=1,
-                           font=("aerial", 15, "italic"), command=lambda: edit(0))
+                           font=("aerial", 15, "italic"), command=edit)
    delete_button = Button(white_frame, text="DELETE", bg="#febe53", fg="white", width=7, height=1,
                            font=("aerial", 15, "italic"), command=delete)
    display_button = Button(white_frame, text="DISPLAY", bg="#febe53", fg="white", width=7, height=1,
                            font=("aerial", 15, "italic"), command=display)
+
    id_entry = Entry(white_frame, bg="white", textvariable=shopID, bd=3, width=25)
    name_entry = Entry(white_frame, bg="white", textvariable=shopName, bd=3, width=25)
    rent_entry = Entry(white_frame, bg="white", textvariable=shopRent, bd=3, width=25)

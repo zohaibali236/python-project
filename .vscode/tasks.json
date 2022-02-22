@@ -6,7 +6,7 @@
         {
             "label": "Run-task",
             "type": "shell",
-            "command": "py ${file}",
+            "command": "py start.py",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

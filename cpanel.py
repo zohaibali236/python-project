@@ -41,3 +41,5 @@ def showCpanel():
     logout_button.place(x=150, y=730)
 
     Cpanel.mainloop()
+
+showCpanel()

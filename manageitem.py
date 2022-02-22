@@ -14,27 +14,30 @@ def logout():
    m1.destroy()
    ShowLoginPage()
 
-# def search(event):
-#     global val
-#     val = event.widget.get()
-#     if val == "":
-#         combo_box['value'] = categories
-#     else:
-#         data=[]
-#         for categ in categories:
-#             if val.lower() in categ.lower():
-#                 data.append(categ)
-#         combo_box['value'] = data
+def search(event):
+    global val
+    global combo_box
+    global cate
+    global categories
+    val = event.widget.get()
+    if val == "":
+        combo_box['value'] = categories
+    else:
+        data=[]
+        for categ in categories:
+            if val.lower() in categ.lower():
+                data.append(categ)
+        combo_box['value'] = data
 
-
+  
     
 def display():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-                              r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
+                              r'DBQ=.\shopping mall.accdb;')
     cur4 = dbHandle.cursor()
     global val
     global all_data
-    # cur4.execute(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
+    cur4.execute(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
     all_data = cur4.fetchall()
     for row in product_list.get_children():
         product_list.delete(row)
@@ -55,11 +58,11 @@ def display():
 
 def add():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-                              r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
+                              r'DBQ=.\shopping mall.accdb;')
     cur1 = dbHandle.cursor()
     global val
-    # cur1.execute(f"insert into shopdata(pid,pname,pquantity,price,category) "
-                # f"values('{var_id.get()}','{var_name.get()}','{var_quantity.get()}','{var_price.get()}','{val}')")
+    cur1.execute(f"insert into shopdata(pid,pname,pquantity,price,category) "
+                f"values('{var_id.get()}','{var_name.get()}','{var_quantity.get()}','{var_price.get()}','{val}')")
 
     dbHandle.commit()
     dbHandle.close()
@@ -68,7 +71,7 @@ def add():
 
 def edit():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-                              r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
+                              r'DBQ=.\shopping mall.accdb;')
     cur2 = dbHandle.cursor()
     global val
     cur2.execute(f"update shopdata set pname='{var_name.get()}',"
@@ -81,9 +84,9 @@ def edit():
 
 def delete():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-                              r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
+                              r'DBQ=.\shopping mall.accdb;')
     cur3 = dbHandle.cursor()
-    # cur3.execute(f"delete from shopdata where pid='{var_id.get()}' AND category='{val}'")
+    cur3.execute(f"delete from shopdata where pid='{var_id.get()}' AND category='{val}'")
     dbHandle.commit()
     dbHandle.close()
     display()
@@ -118,21 +121,21 @@ def showItemManage():
     product_lis = Label(white_frame, text="PRODUCTS LIST", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
 
 
-    # try:
-    #     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-    #                               r'DBQ=C:\Users\Xmart\Documents\shopping mall.accdb;')
-    # except Exception as e:
-    #     print(e)
-    # # creating combo box
-    # cur = dbHandle.cursor()
-    # cur.execute("select shopname from shops")
-    # shops = cur.fetchall()
-    # categories = []
-    # for i in range(len(shops)):
-    #     a = list(shops[i])
-    #     categories.extend(a)
-    # combo_box = ttk.Combobox(white_frame, value=categories, width=22)
-    # combo_box.insert(0, "Type")
+    try:
+        dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+                                  r'DBQ=.\shopping mall.accdb;')
+    except Exception as e:
+        print(e)
+    # creating combo box
+    cur = dbHandle.cursor()
+    cur.execute("select sName from shops")
+    shops = cur.fetchall()
+    categories = []
+    for i in range(len(shops)):
+        a = list(shops[i])
+        categories.extend(a)
+    combo_box = ttk.Combobox(white_frame, value=categories, width=22)
+    combo_box.insert(0, "Type")
 
 
 
@@ -201,8 +204,7 @@ def showItemManage():
     clear_button.place(x=850, y=270)
     product_lis.place(x=475, y=350)
     back_button.place(x=150, y=690)
-    # combo_box.place(x=236, y=214)
-    # combo_box.bind("<KeyRelease>", search)
+    combo_box.place(x=236, y=214)
+    combo_box.bind("<KeyRelease>", search)
 
     m1.mainloop()
-
