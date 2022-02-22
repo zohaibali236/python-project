@@ -225,5 +225,3 @@ def showItemManage():
     product_list.bind("<Double-Button-1>", updateForEdit)
     
     m1.mainloop()
-
-showItemManage()

@@ -1,6 +1,6 @@
 from tkinter import*
 from tkinter import ttk
-import mysql.connector as db
+import pyodbc
 import ctypes
 
 screenSize=[ctypes.windll.user32.GetSystemMetrics(0),ctypes.windll.user32.GetSystemMetrics(1)]
@@ -39,20 +39,27 @@ def ShowOurShops():
     shops.heading("sName",text="Name",anchor=CENTER)
     shops.heading("sLoc",text="Location",anchor=CENTER)
 
-    dbHandle=db.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="mall"
-        )
-    mysql_query=dbHandle.cursor()
-    mysql_query.execute("SELECT ID,Name,Location FROM `shops`")
+    dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+                              r'DBQ=.\shopping mall.accdb;')
+
+    cur=dbHandle.cursor()
+    cur.execute("SELECT sID,sName,sLoc FROM `shops`")
     
-    cache_rows=mysql_query.fetchall()
-    
+    cache_rows=cur.fetchall()
+
+    j=0
     for i in cache_rows:
-        shops.insert('',END,values=i)
-    
+        id = i[0]
+        name = i[1]
+        loc = i[2]
+        if j % 2 == 0:
+            shops.insert('', END, iid = j, values=(id, name, loc),tags=("even",))
+        else:
+            shops.insert('', END, iid = j, values=(id, name, loc), tags=("odd",))
+        j += 1
+    shops.tag_configure("even", foreground="black", background="gray82")
+    shops.tag_configure("odd", foreground="black", background="white")
+
     orange_frame.place(x=0,y=0)
     white_frame.place(x=300,y=50)
     black_frame.place(x=415,y=75)

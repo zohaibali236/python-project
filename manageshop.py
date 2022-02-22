@@ -1,7 +1,6 @@
 from tkinter import*
 from tkinter import ttk
 from tkinter import messagebox
-# import mysql.connector as db
 import ctypes
 import pyodbc
 
@@ -190,5 +189,3 @@ def showManageShop():
    shops.bind("<Double-Button-1>", updateForEdit)
 
    manageShopWindow.mainloop()
-
-showManageShop()

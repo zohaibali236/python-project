@@ -2,7 +2,7 @@ from tkinter import *
 from datetime import datetime
 from tkinter import messagebox
 from PIL import ImageTk
-import mysql.connector as db
+import pyodbc
 import ctypes
 
 
@@ -15,32 +15,29 @@ def back():
     Showhomepage()
 
 def cPanelinit():
-    from cpanel import showCpanel
     loginPage.destroy()
-    dbHandle.close()
+    from cpanel import showCpanel
     showCpanel()
 
-def login():
-    mysql_query = dbHandle.cursor(dictionary = True, buffered = True)
+def login(_):
+    if(UserName.get() == "" or password.get() == ""): return messagebox.showerror("Error!", "User Name or Password cannot be empty!")
+    try:
+        dbHandle = pyodbc.connect(r"DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};"
+                        r"DBQ=.\shopping mall.accdb")
+    except Exception as error: print(error, datetime.now())
 
-    mysql_query.execute(f"SELECT * FROM `USERS` WHERE `NAME` = '{UserName.get()}' AND `PASSWORD` = '{password.get()}'")
-    mysql_query.close()
+    cur = dbHandle.cursor()
 
-    if(not mysql_query.rowcount): return messagebox.showerror("Error!", "Invalid Credentials\nPlease try again!")
+    cur.execute(f"SELECT * FROM `Users` WHERE `UserName` = '{UserName.get()}' AND `Password` = '{password.get()}'")
 
+    if(len(cur.fetchall()) == 0): 
+        messagebox.showerror("Error!", "Invalid Credentials\nPlease try again!")
+        return dbHandle.close()
+
+    dbHandle.close()
     cPanelinit()
 
 def ShowLoginPage():
-    global dbHandle
-    try:
-        dbHandle = db.connect(
-                host = "localhost",
-                user = "root",
-                password = "",
-                database = "mall"
-            )
-    except db.Error as error: print(error, datetime.now())
-
 
     global loginPage
     loginPage = Tk()
@@ -64,4 +61,7 @@ def ShowLoginPage():
     password.place(x=321, y=468, height=20, width=167)
 
     Button(loginPage, text="Login", command=login, bd=1, bg="white",font=("Open Sans Extra Bold", 12)).place(x=400, y=525, anchor="center")
+    
+    loginPage.bind("<Return>", login)
+
     loginPage.mainloop()
