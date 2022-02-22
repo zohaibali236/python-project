@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 import pyodbc
 import ctypes
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
@@ -21,23 +22,25 @@ def search(event):
     if val == "":
         combo_box['value'] = categories
     else:
-        data=[]
         for categ in categories:
             if val.lower() in categ.lower():
-                data.append(categ)
-        combo_box['value'] = data
+                combo_box['value'] = categ
+                break
 
 
-    
 def display():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
                               r'DBQ=.\shopping mall.accdb;')
     cur4 = dbHandle.cursor()
-    global all_data
+    print(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
     cur4.execute(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
-    all_data = cur4.fetchall()
+    
     for row in product_list.get_children():
         product_list.delete(row)
+    
+    all_data = cur4.fetchall()
+    if(len(all_data) == 0): return messagebox.showerror("Error!", "No data found to be displayed")
+
     j=0
     for i in all_data:
         id = i[0]
@@ -52,6 +55,11 @@ def display():
     product_list.tag_configure("even", foreground="black", background="gray82")
     product_list.tag_configure("odd", foreground="black", background="white")
     dbHandle.close()
+
+    var_id.set("")
+    var_name.set("")
+    var_quantity.set("")
+    var_price.set("")
 
 def add():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
@@ -70,7 +78,6 @@ def edit():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
                               r'DBQ=.\shopping mall.accdb;')
     cur2 = dbHandle.cursor()
-    global val
     cur2.execute(f"update shopdata set pname='{var_name.get()}',"
                 f" pquantity='{var_quantity.get()}', price='{var_price.get()}' where pid='{var_id.get()}'")
 
@@ -88,7 +95,7 @@ def delete():
     dbHandle.close()
     display()
 
-def updateForEdit(treeview):
+def updateForEdit(_):
     current = product_list.focus()
     currentItem = product_list.item(current)
     currentItem = currentItem["values"]

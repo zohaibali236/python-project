@@ -33,18 +33,31 @@ def add():
    cur1 = dbHandle.cursor()
    cur1.execute(f"INSERT INTO shops (sID, sName, sLoc, sRent) VALUES('{shopID.get()}', '{shopName.get()}', '{shopRent.get()}', '{shopLoc.get()}')")
    dbHandle.commit()
-   # messagebox.showinfo("Information", f"{cur1.rowcount} Rows affected")
+
+   messagebox.showinfo("Information", f"{cur1.rowcount} Rows affected")
    dbHandle.close()
+
    display()
+
+def updateForEdit(_):
+    current = shops.focus()
+    currentItem = shops.item(current)
+    currentItem = currentItem["values"]
+
+    shopID.set(currentItem[0])
+    shopName.set(currentItem[1])
+    shopRent.set(currentItem[2])
+    shopLoc.set(currentItem[3])
+
 
 def edit():
    dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
                               r'DBQ=.\shopping mall.accdb;')
    cur2 = dbHandle.cursor()
-   global val
-   cur2.execute(f"update shops set pname='{shopName.get()}',"
-                f" pLoc='{shopLoc.get()}', pRent='{shopRent.get()}' where pid='{shopID.get()}'")
-   # messagebox.showinfo("Information", f"{cur2.rowcount} Rows affected")
+   q = f"update shops set sName='{shopName.get()}', sLoc='{shopLoc.get()}', sRent='{shopRent.get()}' where sID='{shopID.get()}'"
+   cur2.execute(q)   
+   messagebox.showinfo("Information", f"{cur2.rowcount} Rows affected")
+  
    dbHandle.commit()
    dbHandle.close()
    display()
@@ -56,7 +69,9 @@ def delete():
                               r'DBQ=.\shopping mall.accdb;')
    cur3 = dbHandle.cursor()
    cur3.execute(f"DELETE FROM shops WHERE sID = '{shopID.get()}'")
-   # messagebox.showinfo("Information", f"{cur3.rowcount} Rows affected")
+
+   messagebox.showinfo("Information", f"{cur3.rowcount} Rows affected")
+   
    dbHandle.commit()
    dbHandle.close()
    display()
@@ -69,10 +84,10 @@ def display():
    
    for rows in shops.get_children():
       shops.delete(rows)
-
-   # if(not dbHandle.rowcount): return messagebox.showerror("Error!", "No data found to be displayed")
-   all_data = cur4.fetchall()
    
+   all_data = cur4.fetchall()
+   if(len(all_data) == 0): return messagebox.showerror("Error!", "No data found to be displayed")
+
    j=0
    for i in all_data:
         id = i[0]
@@ -87,6 +102,12 @@ def display():
    shops.tag_configure("even", foreground="black", background="gray82")
    shops.tag_configure("odd", foreground="black", background="white")
    dbHandle.close()
+
+   shopID.set("")
+   shopName.set("")
+   shopRent.set("")
+   shopLoc.set("")
+
 
 def showManageShop():
 
@@ -165,5 +186,9 @@ def showManageShop():
    display_button.place(x=850, y=270)
    shops_label.place(x=475, y=350)
    back_button.place(x=150, y=690)
+   
+   shops.bind("<Double-Button-1>", updateForEdit)
 
    manageShopWindow.mainloop()
+
+showManageShop()
