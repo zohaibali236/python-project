@@ -1,22 +1,22 @@
 from tkinter import *
 import ctypes
-from manageshop import showManageShop
-from manageitem import showItemManage
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
 def manageShopInit():
     Cpanel.destroy()
+    from manageshop import showManageShop
     showManageShop()
 
 def manageItemInit():
     Cpanel.destroy()
+    from manageitem import showItemManage
     showItemManage()
 
 def logout():
-   from loginpage import ShowLoginPage
-   Cpanel.destroy()
-   ShowLoginPage()
+    Cpanel.destroy()
+    from loginpage import ShowLoginPage
+    ShowLoginPage()
 
 
 def showCpanel():

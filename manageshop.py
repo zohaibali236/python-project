@@ -5,9 +5,7 @@ import ctypes
 import pyodbc
 
 
-
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
-
 
 
    
@@ -18,8 +16,8 @@ def back():
 
 
 def logout():
-   from loginpage import ShowLoginPage
    manageShopWindow.destroy()
+   from loginpage import ShowLoginPage
    ShowLoginPage()
 
 def add():

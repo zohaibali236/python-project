@@ -11,8 +11,8 @@ def back():
     showCpanel()
 
 def logout():
-   from loginpage import ShowLoginPage
    m1.destroy()
+   from loginpage import ShowLoginPage
    ShowLoginPage()
 
 def search(event):
@@ -24,8 +24,8 @@ def search(event):
     else:
         for categ in categories:
             if val.lower() in categ.lower():
-                a = categ
-            combo_box['value'] = a
+                combo_box['value'] = categ
+                break
 
 def display():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'

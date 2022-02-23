@@ -8,13 +8,13 @@ screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.Get
 
 
 def loginPageinit():
-    from loginpage import ShowLoginPage
     homepagewindow.destroy()
+    from loginpage import ShowLoginPage
     ShowLoginPage()
 
 def ourshopsinit():
-    from ourshops import ShowOurShops
     homepagewindow.destroy()
+    from ourshops import ShowOurShops
     ShowOurShops()
 
 def Showhomepage():

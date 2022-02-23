@@ -6,8 +6,8 @@ import ctypes
 screenSize=[ctypes.windll.user32.GetSystemMetrics(0),ctypes.windll.user32.GetSystemMetrics(1)]
 
 def back():
-    from homepage import Showhomepage
     manageShopWindow.destroy()
+    from homepage import Showhomepage
     Showhomepage()
 
 def ShowOurShops():
