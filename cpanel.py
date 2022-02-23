@@ -23,6 +23,7 @@ def showCpanel():
     global Cpanel
     Cpanel = Tk()
     Cpanel.geometry(f"{screenSize[0]}x{screenSize[1]}")
+    Cpanel.title("Management")
     Cpanel.resizable(0,0)
 
     frame = Frame(Cpanel, bg="#febe53", width=screenSize[0], height=screenSize[1])
