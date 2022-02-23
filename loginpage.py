@@ -35,7 +35,7 @@ def login(_):
         password.delete(0, END)
         UserName.delete(0, END)
         return dbHandle.close()
-    
+
     dbHandle.close()
     cPanelinit()
 
@@ -51,6 +51,7 @@ def ShowLoginPage():
     loginPage.configure(bg = "white")
     loginPage.geometry(f"{screenSize[0]}x{screenSize[1]}")
     loginPage.resizable(0,0)
+    loginPage.iconbitmap('.\images\icon_img.ico')
 
     Button(loginPage, text="Back", bg="#febe53", fg="white", font=("aerial", 13, "italic"), command = back).place(x=150, y=690)
 

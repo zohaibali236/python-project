@@ -111,6 +111,8 @@ def showItemManage():
     m1 = Tk()
 
     m1.geometry(f"{screenSize[0]}x{screenSize[1]}")
+    m1.title("Items Management")
+    m1.iconbitmap('.\images\icon_img.ico')
 
     global var_id, var_name, var_price, var_quantity
     var_id = StringVar()
@@ -151,7 +153,7 @@ def showItemManage():
         categories.extend(a)
     global combo_box
     combo_box = ttk.Combobox(white_frame, value=categories, width=22)
-    combo_box.insert(0, "Type")
+    combo_box.insert(0, "Select")
 
 
 

@@ -23,7 +23,7 @@ def Showhomepage():
     homepagewindow.title("Elegante Shopping Mall")
     homepagewindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
     homepagewindow.resizable(0,0)
-
+    homepagewindow.iconbitmap('.\images\icon_img.ico')
     image = Image.open(r"images\title (5).jpg")
     imagenew = ImageTk.PhotoImage(image)
     imagelabel = Label(homepagewindow, image=imagenew)

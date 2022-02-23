@@ -17,6 +17,8 @@ def ShowOurShops():
 
     manageShopWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
     manageShopWindow.resizable(0,0)
+    manageShopWindow.title("Our Shops")
+    manageShopWindow.iconbitmap('.\images\icon_img.ico')
 
     orange_frame=Frame(manageShopWindow,bg="#febe53",width=1524,height=900)
     white_frame=Frame(manageShopWindow,bg="white",width=950,height=730)

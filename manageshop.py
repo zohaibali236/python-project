@@ -110,6 +110,8 @@ def showManageShop():
 
    manageShopWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
    manageShopWindow.resizable(0,0)
+   manageShopWindow.title("Shops Management")
+   manageShopWindow.iconbitmap('.\images\icon_img.ico')
 
    global shopID, shopName, shopRent, shopLoc
 
