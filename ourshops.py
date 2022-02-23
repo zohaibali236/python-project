@@ -6,23 +6,23 @@ import ctypes
 screenSize=[ctypes.windll.user32.GetSystemMetrics(0),ctypes.windll.user32.GetSystemMetrics(1)]
 
 def back():
-    manageShopWindow.destroy()
+    ourShops.destroy()
     from homepage import Showhomepage
     Showhomepage()
 
 def ShowOurShops():
 
-    global manageShopWindow
-    manageShopWindow=Tk()
+    global ourShops
+    ourShops=Tk()
 
-    manageShopWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
-    manageShopWindow.resizable(0,0)
-    manageShopWindow.title("Our Shops")
-    manageShopWindow.iconbitmap('.\images\icon_img.ico')
+    ourShops.geometry(f"{screenSize[0]}x{screenSize[1]}")
+    ourShops.resizable(0,0)
+    ourShops.title("Our Shops")
+    ourShops.iconbitmap('.\images\icon_img.ico')
 
-    orange_frame=Frame(manageShopWindow,bg="#febe53",width=1524,height=900)
-    white_frame=Frame(manageShopWindow,bg="white",width=950,height=730)
-    black_frame=Frame(manageShopWindow,bg="grey",width=725,height=690)
+    orange_frame=Frame(ourShops,bg="#febe53",width=1524,height=900)
+    white_frame=Frame(ourShops,bg="white",width=950,height=730)
+    black_frame=Frame(ourShops,bg="grey",width=725,height=690)
     manage_shops=Label(white_frame,text="OURSHOPS",bg="white",fg="#febe53",font=("aerial",25,"bold"))
 
     back_button = Button(orange_frame, text="Back", bg="#febe53", fg="white", font=("aerial", 13, "italic"), command = back)
@@ -30,7 +30,7 @@ def ShowOurShops():
 
     col=("sID","sName","sLoc")
 
-    shops=ttk.Treeview(manageShopWindow,height=32,columns=col)
+    shops=ttk.Treeview(ourShops,height=32,columns=col)
 
     shops.column("#0",width=0,minwidth=0)
     shops.column("sID",width=200,minwidth=200,anchor=CENTER)
@@ -69,4 +69,4 @@ def ShowOurShops():
     shops.place(x=426,y=85)
     back_button.place(x=150,y=730)
 
-    manageShopWindow.mainloop()
+    ourShops.mainloop()
