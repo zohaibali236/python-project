@@ -24,9 +24,8 @@ def search(event):
     else:
         for categ in categories:
             if val.lower() in categ.lower():
-                combo_box['value'] = categ
-                break
-
+                a = categ
+            combo_box['value'] = a
 
 def display():
     dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
