@@ -33,6 +33,7 @@ def login(_):
     if(len(cur.fetchall()) == 0): 
         messagebox.showerror("Error!", "Invalid Credentials\nPlease try again!")
         password.delete(0, END)
+        UserName.delete(0, END)
         return dbHandle.close()
 
     dbHandle.close()
