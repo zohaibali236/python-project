@@ -30,11 +30,9 @@ def add():
    cur1 = dbHandle.cursor()
    cur1.execute(f"INSERT INTO shops (sID, sName, sLoc, sRent) VALUES('{shopID.get()}', '{shopName.get()}', '{shopRent.get()}', '{shopLoc.get()}')")
    dbHandle.commit()
-
-   messagebox.showinfo("Information", f"{cur1.rowcount} Rows affected")
    dbHandle.close()
-
    display()
+   messagebox.showinfo("Information", f"{cur1.rowcount} new shop added")
 
 def updateForEdit(_):
     current = shops.focus()
@@ -53,11 +51,11 @@ def edit():
    cur2 = dbHandle.cursor()
    q = f"update shops set sName='{shopName.get()}', sLoc='{shopLoc.get()}', sRent='{shopRent.get()}' where sID='{shopID.get()}'"
    cur2.execute(q)   
-   messagebox.showinfo("Information", f"{cur2.rowcount} Rows affected")
-  
    dbHandle.commit()
    dbHandle.close()
    display()
+   messagebox.showinfo("Information", f"{cur2.rowcount} shop updated")
+  
   
       
 def delete():
@@ -66,12 +64,11 @@ def delete():
                               r'DBQ=.\shopping mall.accdb;')
    cur3 = dbHandle.cursor()
    cur3.execute(f"DELETE FROM shops WHERE sID = '{shopID.get()}'")
-
-   messagebox.showinfo("Information", f"{cur3.rowcount} Rows affected")
-   
    dbHandle.commit()
    dbHandle.close()
    display()
+   messagebox.showinfo("Information", f"{cur3.rowcount} shop deleted")
+   
 
 def display():
    dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'

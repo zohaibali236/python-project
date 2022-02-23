@@ -71,6 +71,7 @@ def add():
     dbHandle.commit()
     dbHandle.close()
     display()
+    messagebox.showinfo("Information", f"{cur1.rowcount} item added")
 
 
 def edit():
@@ -79,10 +80,10 @@ def edit():
     cur2 = dbHandle.cursor()
     cur2.execute(f"update shopdata set pname='{var_name.get()}',"
                 f" pquantity='{var_quantity.get()}', price='{var_price.get()}' where pid='{var_id.get()}'")
-
     dbHandle.commit()
     dbHandle.close()
     display()
+    messagebox.showinfo("Information", f"{cur2.rowcount} Row updated")
 
 
 def delete():
@@ -93,6 +94,7 @@ def delete():
     dbHandle.commit()
     dbHandle.close()
     display()
+    messagebox.showinfo("Information", f"{cur3.rowcount} Row deleted")
 
 def updateForEdit(_):
     current = product_list.focus()
