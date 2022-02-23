@@ -41,8 +41,8 @@ def updateForEdit(_):
 
     shopID.set(currentItem[0])
     shopName.set(currentItem[1])
-    shopRent.set(currentItem[2])
-    shopLoc.set(currentItem[3])
+    shopLoc.set(currentItem[2])
+    shopRent.set(currentItem[3])
 
 
 def edit():
@@ -129,19 +129,19 @@ def showManageShop():
    shops_label = Label(white_frame, text="SHOPS LIST", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
 
    global shops
-   col = ("sID", "sName", "sRent", "sLoc")
+   col = ("sID", "sName", "sLoc", "sRent")
    shops = ttk.Treeview(manageShopWindow, height=13, columns=col)
 
    shops.column("#0", width=0, minwidth=0)
    shops.column("sID", width=200, minwidth=200, anchor=CENTER)
    shops.column("sName", width=300, minwidth=300, anchor=CENTER)
-   shops.column("sRent", width=300, minwidth=300, anchor=CENTER)
-   shops.column("sLoc", width=200, anchor=CENTER)
+   shops.column("sLoc", width=300, minwidth=300, anchor=CENTER)
+   shops.column("sRent", width=200, anchor=CENTER)
 
    shops.heading("sID", text="ID", anchor=CENTER)
    shops.heading("sName", text="Name", anchor=CENTER)
-   shops.heading("sRent", text="Rent", anchor=CENTER)
    shops.heading("sLoc", text="Location", anchor=CENTER)
+   shops.heading("sRent", text="Rent", anchor=CENTER)
 
    shops.place(x=426, y=460)
 
