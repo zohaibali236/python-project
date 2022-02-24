@@ -64,13 +64,15 @@ def whatweoffer():
 
 
 def ourclients():
-
 	aboutUsWindow.destroy()
+
 	global ourClientsWindow
 	ourClientsWindow = Tk()
+
 	ourClientsWindow.title("Our Clients")
 	ourClientsWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
 	ourClientsWindow.configure(background='indian red')
+
 	hlabel = Label(ourClientsWindow, text="Our Clients",font=("Segoe Script",60,"bold"),bg ='indian red',fg='black')
 	hlabel.grid(row=0,column=1,padx=380,pady=50)
 
@@ -79,6 +81,7 @@ def ourclients():
 	imagenew = ImageTk.PhotoImage(image)
 	imagelabel = Label(ourClientsWindow, image=imagenew)
 	imagelabel.place(x=50, y=230)
+
 	image2 = Image.open(r"images\ecs.png")
 	imagenew2 = ImageTk.PhotoImage(image2)
 	imagelabel2 = Label(ourClientsWindow, image=imagenew2)
@@ -126,21 +129,23 @@ def showAboutUsWindow():
 	#background
 	my_img = ImageTk.PhotoImage(Image.open(r"images\about bg9.png"))
 	my_label = Label(aboutUsWindow, image=my_img)
+	my_label.place(x=0,y=0)
 
 	#btn for back
 	btnback = Button(aboutUsWindow,text='Back',bg='black',fg='white' ,borderwidth=0,command=back)
 	btnback.place(x=3,y=900,width=100,height=50)
-	my_label.place(x=0,y=0)
 
 	#label
 	l = Label(aboutUsWindow,text="Elegante Mall and Cinemas is one of the biggest mixed-use development in Pakistan. The mall is centrally",font=("Segoe Script",16,"bold"),bg ='Indian red',fg='white')
-	l1 = Label(aboutUsWindow,text=("air-conditioned with valet parking services for customers.It is the first of its kind mall in Pakistan"),font=("Segoe Script",15,"bold"),bg ='Indian red',fg='white')
 	l.grid(row=2,column=1,padx=25,pady=27)
+	
+	l1 = Label(aboutUsWindow,text=("air-conditioned with valet parking services for customers.It is the first of its kind mall in Pakistan"),font=("Segoe Script",15,"bold"),bg ='Indian red',fg='white')
 	l1.grid(row=3,column=1)
 
 	#btn for what we offer
 	btn1 = Button(aboutUsWindow, text='What we offer', bg='firebrick2', fg='white', borderwidth=9,relief=SUNKEN,font=('Segoe Script',20,"bold"),command = whatweoffer)
 	btn1.place(x=900, y=350, width=300, height=100)
+	
 	btn2 = Button(aboutUsWindow, text='Our Clients', bg='firebrick2', fg='white', borderwidth=9, relief=SUNKEN,font=('Segoe Script', 20, "bold"),command=ourclients)
 	btn2.place(x=900, y=500, width=300, height=100)
 
