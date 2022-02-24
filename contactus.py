@@ -1,9 +1,9 @@
 from tkinter import *
 from PIL import Image , ImageTk
 import webbrowser
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
 
 def mailto(url):
@@ -18,7 +18,7 @@ def showContactUsWindow():
 	global contactUsWindow
 	contactUsWindow = Tk()
 
-	contactUsWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	contactUsWindow.state('zoomed')
 	contactUsWindow.title("Contact us")
 
 	my_img = ImageTk.PhotoImage(Image.open(r"images\contact.png"))

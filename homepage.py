@@ -1,9 +1,9 @@
 from tkinter import  *
 from PIL import Image , ImageTk
 from tkinter import ttk
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
 def aboutusinit():
 	homepagewindow.destroy()
@@ -29,7 +29,7 @@ def Showhomepage():
 	global homepagewindow
 	homepagewindow = Tk()
 	homepagewindow.title("Elegante Shopping Mall")
-	homepagewindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	homepagewindow.state('zoomed')
 	homepagewindow.resizable(0,0)
 	homepagewindow.iconbitmap('.\images\icon_img.ico')
 	image = Image.open(r"images\title (5).jpg")

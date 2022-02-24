@@ -2,9 +2,9 @@ from tkinter import*
 from tkinter import ttk
 from tkinter import messagebox
 import pyodbc
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
    
 def back():
@@ -105,7 +105,7 @@ def showManageShop():
 	global manageShopWindow
 	manageShopWindow = Tk()
 
-	manageShopWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	manageShopWindow.state('zoomed')
 	manageShopWindow.resizable(0,0)
 	manageShopWindow.title("Shops Management")
 	manageShopWindow.iconbitmap('.\images\icon_img.ico')
@@ -117,7 +117,7 @@ def showManageShop():
 	shopRent= StringVar()
 	shopLoc = StringVar()
 
-	orange_frame = Frame(manageShopWindow, bg="#febe53", width=1524, height=900)
+	orange_frame = Frame(manageShopWindow, bg="#febe53", width=1536, height=864)
 	white_frame = Frame(manageShopWindow, bg="white", width=1220, height=730)
 	black_frame = Frame(manageShopWindow, bg="grey", width=1025, height=310 )
 	manage_shops = Label(white_frame, text="MANAGE SHOPS", bg="white", fg="#febe53", font=("aerial", 25, "bold"))

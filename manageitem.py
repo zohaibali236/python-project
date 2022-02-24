@@ -2,9 +2,9 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import pyodbc
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
 def back():
 	m1.destroy()
@@ -111,7 +111,7 @@ def showItemManage():
 	global m1
 	m1 = Tk()
 
-	m1.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	m1.state('zoomed')
 	m1.title("Items Management")
 	m1.iconbitmap('.\images\icon_img.ico')
 
@@ -124,7 +124,7 @@ def showItemManage():
 
 	# shops items management screen
 	# labels
-	orange_frame = Frame(m1, bg="#febe53", width=1524, height=screenSize[1])
+	orange_frame = Frame(m1, bg="#febe53", width=1536, height=864)
 	white_frame = Frame(m1, bg="white", width=1220, height=730)
 	black_frame = Frame(m1, bg="grey", width=1025, height=310 )
 	seller_label = Label(orange_frame, text="SELLER", bg="#febe53", fg="white", font=("aerial", 30))
@@ -201,7 +201,7 @@ def showItemManage():
 
 	# putting on screen
 
-	orange_frame.place(x=3, y=1)
+	orange_frame.place(x=0, y=0)
 	white_frame.place(x=300, y=50)
 	black_frame.place(x=415, y=450)
 	seller_label.place(x=5, y=200)

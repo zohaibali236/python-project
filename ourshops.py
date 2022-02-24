@@ -1,9 +1,9 @@
 from tkinter import*
 from tkinter import ttk
 import pyodbc
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
 def back():
 	ourShops.destroy()
@@ -15,7 +15,7 @@ def ShowOurShops():
 	global ourShops
 	ourShops=Tk()
 
-	ourShops.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	ourShops.state('zoomed')
 	ourShops.resizable(0,0)
 	ourShops.title("Our Shops")
 	ourShops.iconbitmap('.\images\icon_img.ico')

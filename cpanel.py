@@ -1,7 +1,7 @@
 from tkinter import *
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
 def manageShopInit():
 	Cpanel.destroy()
@@ -22,7 +22,7 @@ def logout():
 def showCpanel():
 	global Cpanel
 	Cpanel = Tk()
-	Cpanel.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	Cpanel.state('zoomed')
 	Cpanel.title("Management")
 	Cpanel.resizable(0,0)
 	Cpanel.iconbitmap('.\images\icon_img.ico')

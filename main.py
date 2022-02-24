@@ -2,7 +2,7 @@ USE_SQL_SERVER = True
 
 """Importing modules"""
 from tkinter import*
-import ctypes
+
 from datetime import datetime
 from tkinter import messagebox
 from tkinter import ttk
@@ -36,7 +36,7 @@ m1 = Tk()
 
 
 """window sizes"""
-m1.geometry(f"{screenSize[0]}x{screenSize[1]}")
+m1.state('zoomed')
 
 """window titles"""
 m1.title("Shopping mall")
@@ -184,7 +184,7 @@ def cmd():
     loginPage = Tk()
     loginPage.title("Login")
     loginPage.configure(bg="white")
-    loginPage.geometry(f"{screenSize[0]}x{screenSize[1]}")
+    loginPage.state('zoomed')
 
     backgroundimage = ImageTk.PhotoImage(file=r"images\icon.jpg", master = loginPage)
     Label(loginPage, image=backgroundimage, bd=0).pack(side=TOP)

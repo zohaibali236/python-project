@@ -1,8 +1,8 @@
 from tkinter import *
 from PIL import ImageTk, Image
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
 
 def back(window):
@@ -24,7 +24,7 @@ def whatweoffer():
 	whatWeOffer = Tk()
 
 	whatWeOffer.title("What we offer")
-	whatWeOffer.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	whatWeOffer.state('zoomed')
 	whatWeOffer.configure(background='grey21')
 	hlabel = Label(whatWeOffer, text="What We Offer",font=("Segoe Script",25,"bold"),bg ='Red',fg='black')
 	hlabel.grid(row=0,column=1,padx=530)
@@ -69,7 +69,7 @@ def ourclients():
 	global ourClientsWindow
 	ourClientsWindow = Tk()
 	ourClientsWindow.title("Our Clients")
-	ourClientsWindow.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	ourClientsWindow.state('zoomed')
 	ourClientsWindow.configure(background='indian red')
 	hlabel = Label(ourClientsWindow, text="Our Clients",font=("Segoe Script",60,"bold"),bg ='indian red',fg='black')
 	hlabel.grid(row=0,column=1,padx=380,pady=50)
@@ -120,7 +120,7 @@ def ourclients():
 def showAboutUsWindow():
 	global aboutUsWindow
 	aboutUsWindow = Tk()
-	aboutUsWindow.geometry('1500x1500')
+	aboutUsWindow.state("zoomed")
 	aboutUsWindow.title("About us")
 
 	#background

@@ -3,9 +3,9 @@ from datetime import datetime
 from tkinter import messagebox
 from PIL import ImageTk
 import pyodbc
-from ctypes import windll
 
-screenSize = [windll.user32.GetSystemMetrics(0), windll.user32.GetSystemMetrics(1)]
+
+
 
 def back():
 	loginPage.destroy()
@@ -47,7 +47,7 @@ def ShowLoginPage():
 	Label(loginPage, image=bgimg).pack()
 
 	loginPage.configure(bg = "white")
-	loginPage.geometry(f"{screenSize[0]}x{screenSize[1]}")
+	loginPage.state('zoomed')
 	loginPage.resizable(0,0)
 	loginPage.iconbitmap('.\images\icon_img.ico')
 
@@ -55,11 +55,11 @@ def ShowLoginPage():
 
 	global UserName
 	UserName = Entry(loginPage, bd = 0, bg="white", font=("Open Sans Extra Bold", 12))
-	UserName.place(x=369, y=394, height=19, width=167)
+	UserName.place(x=369, y=383, height=19, width=167)
 
 	global password
 	password = Entry(loginPage, show="*", bg="white", bd=0, font=("Open Sans Extra Bold", 12))
-	password.place(x=369, y=451, height=19, width=167)
+	password.place(x=369, y=440, height=19, width=167)
 
 	Button(loginPage, text="Login", command=lambda: login(0), bd=1, bg="white",font=("Open Sans Extra Bold", 12)).place(x=400, y=525, anchor="center")
 	
