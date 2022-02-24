@@ -6,6 +6,15 @@ import ctypes
 
 screenSize = [ctypes.windll.user32.GetSystemMetrics(0), ctypes.windll.user32.GetSystemMetrics(1)]
 
+def aboutusinit():
+    homepagewindow.destroy()
+    from aboutus import showAboutUsWindow
+    showAboutUsWindow()
+
+def contactusinit():
+    homepagewindow.destroy()
+    from contactus import showContactUsWindow
+    showContactUsWindow()
 
 def loginPageinit():
     homepagewindow.destroy()
@@ -48,11 +57,11 @@ def Showhomepage():
     ourshop.place(x=610,y=110)
 
     aboutus_img=PhotoImage(file=r'images\a1.png')
-    aboutus=Button(homepagewindow,image=aboutus_img,bg="white",height=100,width=250,)
+    aboutus=Button(homepagewindow,image=aboutus_img,bg="white",height=100,width=250,command = aboutusinit)
     aboutus.place(x=905,y=110)
 
     contact_us_img=PhotoImage(file=r'images\c1.png')
-    contact=Button(homepagewindow,image=contact_us_img,bg="white",height=100,width=250)
+    contact=Button(homepagewindow,image=contact_us_img,bg="white",height=100,width=250,command=contactusinit)
     contact.place(x=1200,y=110)
 
     homepagewindow.mainloop()
