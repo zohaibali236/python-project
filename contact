@@ -9,7 +9,7 @@ def contact():
     top = Toplevel()
     top.geometry('1500x1500')
     top.title("Contact us")
-    my_img = ImageTk.PhotoImage(Image.open("C:\\Users\\pc\\Downloads\\contact.png"))
+    my_img = ImageTk.PhotoImage(Image.open(".\contact.png"))
     my_label = Label(top, image=my_img)
     my_label.place(x=0, y=0)
     hlabel = Label(top, text="Contact Info", font=("Helvetica", 60, "bold"), bg='grey90', fg='black')
@@ -53,23 +53,23 @@ def contact():
     l1 = Label(top,text='Monday To Saturday: 11:00am till 10:00pm | Food Court: 11:00am till 11:59pm',font=('calibri',15,"bold"),fg='black')
     l1.place(x=450,y=555)
 
-    image = Image.open("C:\\Users\\pc\Desktop\\loc icon.png")
+    image = Image.open(".\loc icon.png")
     imagenew = ImageTk.PhotoImage(image)
     imagelabel = Label(top, image=imagenew)
     imagelabel.place(x=300, y=350)
 
 
-    image2 = Image.open("C:\\Users\\pc\Desktop\\web.png")
+    image2 = Image.open(".\web.png")
     imagenew2 = ImageTk.PhotoImage(image2)
     imagelabel2 = Label(top, image=imagenew2)
     imagelabel2.place(x=300, y=450)
 
-    image3 = Image.open("C:\\Users\\pc\Desktop\\clock.jpg")
+    image3 = Image.open(".\clock.jpg")
     imagenew3 = ImageTk.PhotoImage(image3)
     imagelabel3 = Label(top, image=imagenew3)
     imagelabel3.place(x=300, y=550)
 
-    image4 = Image.open("C:\\Users\\pc\Desktop\\msg.png")
+    image4 = Image.open(".\msg.png")
     imagenew4 = ImageTk.PhotoImage(image4)
     imagelabel4 = Label(top, image=imagenew4)
     imagelabel4.place(x=300, y=650)

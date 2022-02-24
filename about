@@ -20,32 +20,32 @@ def about():
         hlabel = Label(top2, text="What We Offer",font=("Segoe Script",25,"bold"),bg ='Red',fg='black')
         hlabel.grid(row=0,column=1,padx=530)
         #images
-        image = Image.open("C:\\Users\\pc\Desktop\\open shop.jpg")
+        image = Image.open(".\open shop.jpg")
         imagenew = ImageTk.PhotoImage(image)
         imagelabel = Label(top2, image=imagenew)
         imagelabel.place(x=70, y=200)
 
-        image2 = Image.open("C:\\Users\\pc\Desktop\\cinema.jpg")
+        image2 = Image.open(".\cinema.jpg")
         imagenew2 = ImageTk.PhotoImage(image2)
         imagelabel2 = Label(top2, image=imagenew2)
         imagelabel2.place(x=500, y=200)
 
-        image3 = Image.open("C:\\Users\\pc\Desktop\\nature.jpg")
+        image3 = Image.open(".\nature.jpg")
         imagenew3 = ImageTk.PhotoImage(image3)
         imagelabel3 = Label(top2, image=imagenew3)
         imagelabel3.place(x=900, y=200)
 
-        image4 = Image.open("C:\\Users\\pc\Desktop\\food.jpg")
+        image4 = Image.open(".\food.jpg")
         imagenew4 = ImageTk.PhotoImage(image4)
         imagelabel4 = Label(top2, image=imagenew4)
         imagelabel4.place(x=70, y=550)
 
-        image5 = Image.open("C:\\Users\\pc\Desktop\\play.jpg")
+        image5 = Image.open(".\play.jpg")
         imagenew5 = ImageTk.PhotoImage(image5)
         imagelabel5 = Label(top2, image=imagenew5)
         imagelabel5.place(x=500, y=550)
 
-        image6 = Image.open("C:\\Users\\pc\Desktop\\car parking.jpg")
+        image6 = Image.open(".\car parking.jpg")
         imagenew6 = ImageTk.PhotoImage(image6)
         imagelabel6 = Label(top2, image=imagenew6)
         imagelabel6.place(x=900, y=550)
@@ -62,42 +62,42 @@ def about():
 
 
         #images
-        image = Image.open("C:\\Users\\pc\Desktop\\kfc.png")
+        image = Image.open(".\kfc.png")
         imagenew = ImageTk.PhotoImage(image)
         imagelabel = Label(top3, image=imagenew)
         imagelabel.place(x=50, y=230)
 
-        image2 = Image.open("C:\\Users\\pc\Desktop\\ecs.png")
+        image2 = Image.open(".\ecs.png")
         imagenew2 = ImageTk.PhotoImage(image2)
         imagelabel2 = Label(top3, image=imagenew2)
         imagelabel2.place(x=350, y=230)
 
-        image3 = Image.open("C:\\Users\\pc\Desktop\\bata.png")
+        image3 = Image.open(".\bata.png")
         imagenew3 = ImageTk.PhotoImage(image3)
         imagelabel3 = Label(top3, image=imagenew3)
         imagelabel3.place(x=650, y=230)
 
-        image4 = Image.open("C:\\Users\\pc\Desktop\\warda.jpg")
+        image4 = Image.open(".\warda.jpg")
         imagenew4 = ImageTk.PhotoImage(image4)
         imagelabel4 = Label(top3, image=imagenew4)
         imagelabel4.place(x=950, y=230)
 
-        image5 = Image.open("C:\\Users\\pc\Desktop\\pizza.png")
+        image5 = Image.open(".\pizza.png")
         imagenew5 = ImageTk.PhotoImage(image5)
         imagelabel5 = Label(top3, image=imagenew5)
         imagelabel5.place(x=50, y=550)
 
-        image6 = Image.open("C:\\Users\\pc\Desktop\\gulahmed.png")
+        image6 = Image.open(".\gulahmed.png")
         imagenew6 = ImageTk.PhotoImage(image6)
         imagelabel6 = Label(top3, image=imagenew6)
         imagelabel6.place(x=350, y=550)
 
-        image7 = Image.open("C:\\Users\\pc\Desktop\\hbl.png")
+        image7 = Image.open(".\hbl.png")
         imagenew7 = ImageTk.PhotoImage(image7)
         imagelabel7 = Label(top3, image=imagenew7)
         imagelabel7.place(x=650, y=550)
 
-        image8 = Image.open("C:\\Users\\pc\Desktop\\1step.png")
+        image8 = Image.open(".\1step.png")
         imagenew8 = ImageTk.PhotoImage(image8)
         imagelabel8 = Label(top3, image=imagenew8)
         imagelabel8.place(x=950, y=550)
