@@ -1,3 +1,8 @@
+from tkinter import *
+from PIL import Image , ImageTk
+from tkinter import tk
+
+
 def about():
     global my_img
     top = Toplevel()

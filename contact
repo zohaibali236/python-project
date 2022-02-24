@@ -1,3 +1,8 @@
+from tkinter import *
+from PIL import Image , ImageTk
+from tkinter import ttk
+
+
 def contact():
     import webbrowser
     global my_img,imagenew,imagenew2,imagenew3,imagenew4
