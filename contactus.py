@@ -20,7 +20,7 @@ def showContactUsWindow():
 
 	contactUsWindow.state('zoomed')
 	contactUsWindow.title("Contact us")
-
+	contactUsWindow.resizable(0,0)
 	my_img = ImageTk.PhotoImage(Image.open(r"images\contact.png"))
 	my_label = Label(contactUsWindow, image=my_img)
 	my_label.place(x=0, y=0)

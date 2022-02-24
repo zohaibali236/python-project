@@ -125,7 +125,7 @@ def showAboutUsWindow():
 	aboutUsWindow = Tk()
 	aboutUsWindow.state("zoomed")
 	aboutUsWindow.title("About us")
-
+	aboutUsWindow.resizable(0,0)
 	#background
 	my_img = ImageTk.PhotoImage(Image.open(r"images\about bg9.png"))
 	my_label = Label(aboutUsWindow, image=my_img)

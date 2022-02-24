@@ -114,6 +114,7 @@ def showItemManage():
 	m1.state('zoomed')
 	m1.title("Items Management")
 	m1.iconbitmap('.\images\icon_img.ico')
+	m1.resizable(0,0)
 
 	global var_id, var_name, var_price, var_quantity
 	var_id = StringVar()

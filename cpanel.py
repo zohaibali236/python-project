@@ -24,9 +24,10 @@ def showCpanel():
 	Cpanel = Tk()
 	Cpanel.state('zoomed')
 	Cpanel.title("Management")
+	Cpanel.state('zoomed')
 	Cpanel.resizable(0,0)
 	Cpanel.iconbitmap('.\images\icon_img.ico')
-	frame = Frame(Cpanel, bg="#febe53", width=screenSize[0], height=screenSize[1])
+	frame = Frame(Cpanel, bg="#febe53", width=1536, height=864)
 
 	shopIcon = PhotoImage(file=r"images\shopicon.png")
 	itemsIcon = PhotoImage(file=r"images\itemsicon.png")
