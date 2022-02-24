@@ -1,0 +1,119 @@
+def about():
+    global my_img
+    top = Toplevel()
+    top.geometry('1500x1500')
+    top.title("About us")
+    def back():
+        top.destroy()
+    def whatweoffer():
+        global imagenew, imagenew2,imagenew3,imagenew4,imagenew5,imagenew6
+        top.destroy()
+        top2 = Toplevel()
+        top2.title("What we offer")
+        top2.geometry("1500x1500")
+        top2.configure(background='grey21')
+        hlabel = Label(top2, text="What We Offer",font=("Segoe Script",25,"bold"),bg ='Red',fg='black')
+        hlabel.grid(row=0,column=1,padx=530)
+        #images
+        image = Image.open("C:\\Users\\pc\Desktop\\open shop.jpg")
+        imagenew = ImageTk.PhotoImage(image)
+        imagelabel = Label(top2, image=imagenew)
+        imagelabel.place(x=70, y=200)
+
+        image2 = Image.open("C:\\Users\\pc\Desktop\\cinema.jpg")
+        imagenew2 = ImageTk.PhotoImage(image2)
+        imagelabel2 = Label(top2, image=imagenew2)
+        imagelabel2.place(x=500, y=200)
+
+        image3 = Image.open("C:\\Users\\pc\Desktop\\nature.jpg")
+        imagenew3 = ImageTk.PhotoImage(image3)
+        imagelabel3 = Label(top2, image=imagenew3)
+        imagelabel3.place(x=900, y=200)
+
+        image4 = Image.open("C:\\Users\\pc\Desktop\\food.jpg")
+        imagenew4 = ImageTk.PhotoImage(image4)
+        imagelabel4 = Label(top2, image=imagenew4)
+        imagelabel4.place(x=70, y=550)
+
+        image5 = Image.open("C:\\Users\\pc\Desktop\\play.jpg")
+        imagenew5 = ImageTk.PhotoImage(image5)
+        imagelabel5 = Label(top2, image=imagenew5)
+        imagelabel5.place(x=500, y=550)
+
+        image6 = Image.open("C:\\Users\\pc\Desktop\\car parking.jpg")
+        imagenew6 = ImageTk.PhotoImage(image6)
+        imagelabel6 = Label(top2, image=imagenew6)
+        imagelabel6.place(x=900, y=550)
+
+    def ourclients():
+        global imagenew, imagenew2,imagenew3,imagenew4,imagenew5,imagenew6,imagenew7,imagenew8
+        top.destroy()
+        top3 = Toplevel()
+        top3.title("Our Clients")
+        top3.geometry("1500x1500")
+        top3.configure(background='indian red')
+        hlabel = Label(top3, text="Our Clients",font=("Segoe Script",60,"bold"),bg ='indian red',fg='black')
+        hlabel.grid(row=0,column=1,padx=380,pady=50)
+
+
+        #images
+        image = Image.open("C:\\Users\\pc\Desktop\\kfc.png")
+        imagenew = ImageTk.PhotoImage(image)
+        imagelabel = Label(top3, image=imagenew)
+        imagelabel.place(x=50, y=230)
+
+        image2 = Image.open("C:\\Users\\pc\Desktop\\ecs.png")
+        imagenew2 = ImageTk.PhotoImage(image2)
+        imagelabel2 = Label(top3, image=imagenew2)
+        imagelabel2.place(x=350, y=230)
+
+        image3 = Image.open("C:\\Users\\pc\Desktop\\bata.png")
+        imagenew3 = ImageTk.PhotoImage(image3)
+        imagelabel3 = Label(top3, image=imagenew3)
+        imagelabel3.place(x=650, y=230)
+
+        image4 = Image.open("C:\\Users\\pc\Desktop\\warda.jpg")
+        imagenew4 = ImageTk.PhotoImage(image4)
+        imagelabel4 = Label(top3, image=imagenew4)
+        imagelabel4.place(x=950, y=230)
+
+        image5 = Image.open("C:\\Users\\pc\Desktop\\pizza.png")
+        imagenew5 = ImageTk.PhotoImage(image5)
+        imagelabel5 = Label(top3, image=imagenew5)
+        imagelabel5.place(x=50, y=550)
+
+        image6 = Image.open("C:\\Users\\pc\Desktop\\gulahmed.png")
+        imagenew6 = ImageTk.PhotoImage(image6)
+        imagelabel6 = Label(top3, image=imagenew6)
+        imagelabel6.place(x=350, y=550)
+
+        image7 = Image.open("C:\\Users\\pc\Desktop\\hbl.png")
+        imagenew7 = ImageTk.PhotoImage(image7)
+        imagelabel7 = Label(top3, image=imagenew7)
+        imagelabel7.place(x=650, y=550)
+
+        image8 = Image.open("C:\\Users\\pc\Desktop\\1step.png")
+        imagenew8 = ImageTk.PhotoImage(image8)
+        imagelabel8 = Label(top3, image=imagenew8)
+        imagelabel8.place(x=950, y=550)
+
+
+    #background
+    my_img = ImageTk.PhotoImage(Image.open("C:\\Users\\pc\\Downloads\\about bg9.png"))
+    my_label = Label(top, image=my_img)
+    #btn for back
+    btnback = tk.Button(top,text='Back',bg='black',fg='white' ,borderwidth=0,command=back)
+    btnback.place(x=3,y=900,width=100,height=50)
+    my_label.place(x=0,y=0)
+    #label
+    l = Label(top,text="Elegante Mall and Cinemas is one of the biggest mixed-use development in Pakistan. The mall is centrally",font=("Segoe Script",16,"bold"),bg ='Indian red',fg='white')
+    l1 = Label(top,text=("air-conditioned with valet parking services for customers.It is the first of its kind mall in Pakistan"),font=("Segoe Script",15,"bold"),bg ='Indian red',fg='white')
+    l.grid(row=2,column=1,padx=25,pady=27)
+    l1.grid(row=3,column=1)
+    #btn for what we offer
+
+    btn1 = tk.Button(top, text='What we offer', bg='firebrick2', fg='white', borderwidth=9,relief=SUNKEN,font=('Segoe Script',20,"bold"),command = whatweoffer)
+    btn1.place(x=900, y=350, width=300, height=100)
+    btn2 = tk.Button(top, text='Our Clients', bg='firebrick2', fg='white', borderwidth=9, relief=SUNKEN,font=('Segoe Script', 20, "bold"),command=ourclients)
+    btn2.place(x=900, y=500, width=300, height=100)
+
