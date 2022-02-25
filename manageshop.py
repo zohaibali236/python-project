@@ -42,7 +42,6 @@ def updateForEdit(_):
 	shopLoc.set(currentItem[2])
 	shopRent.set(currentItem[3])
 
-
 def edit():
    dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
@@ -180,7 +179,7 @@ def showManageShop():
 	shops_label.place(x=475, y=350)
 	back_button.place(x=150, y=690)
 
-  
+
 	shops.bind("<Double-Button-1>", updateForEdit)
 
 	manageShopWindow.mainloop()
