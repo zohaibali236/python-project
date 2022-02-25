@@ -62,7 +62,27 @@ def whatweoffer():
 
 	back_button = Button(whatWeOffer, text="Back", bg="black", fg="#febe53", font=("aerial", 13, "italic"), command = lambda: back("whatWeOffer"))
 	back_button.place(x=150, y=690)
+    
+         #labels
+        label1 = Label(top2, text="Shopping Line", font=("Segoe Script", 30, "bold"), bg='red', fg='black')
+        label1.place(x=90,y=440)
 
+        label2 = Label(top2, text="Multiplex Cinema", font=("Segoe Script", 25, "bold"), bg='red', fg='black')
+        label2.place(x=515, y=440)
+
+        label3 = Label(top2, text="Health and Beauty", font=("Segoe Script", 23, "bold"), bg='red', fg='black')
+        label3.place(x=915, y=440)
+
+        label4 = Label(top2, text="Food Court", font=("Segoe Script", 35, "bold"), bg='red', fg='black')
+        label4.place(x=100, y=785)
+
+        label5 = Label(top2, text="Play Area", font=("Segoe Script", 35, "bold"), bg='red', fg='black')
+        label5.place(x=540, y=785)
+
+        label6 = Label(top2, text="Car Parking", font=("Segoe Script", 30, "bold"), bg='red', fg='black')
+        label6.place(x=940, y=785)
+
+	
 	whatWeOffer.mainloop()
 
 
