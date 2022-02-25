@@ -60,6 +60,9 @@ def whatweoffer():
 	imagelabel6 = Label(whatWeOffer, image=imagenew6)
 	imagelabel6.place(x=900, y=550)
 
+	back_button = Button(whatWeOffer, text="Back", bg="black", fg="#febe53", font=("aerial", 13, "italic"), command = lambda: back("whatWeOffer"))
+	back_button.place(x=150, y=690)
+
 	whatWeOffer.mainloop()
 
 
@@ -117,6 +120,9 @@ def ourclients():
 	imagelabel8 = Label(ourClientsWindow, image=imagenew8)
 	imagelabel8.place(x=950, y=550)
 
+	back_button = Button(ourClientsWindow, text="Back", bg="black", fg="#febe53", font=("aerial", 13, "italic"), command =lambda:back("ourClientsWindow"))
+	back_button.place(x=150, y=690) 
+
 	ourClientsWindow.mainloop()
 
 
@@ -149,4 +155,7 @@ def showAboutUsWindow():
 	btn2 = Button(aboutUsWindow, text='Our Clients', bg='firebrick2', fg='white', borderwidth=9, relief=SUNKEN,font=('Segoe Script', 20, "bold"),command=ourclients)
 	btn2.place(x=900, y=500, width=300, height=100)
 
+
+	back_button = Button(aboutUsWindow, text="Back", bg="black", fg="#febe53", font=("aerial", 13, "italic"), command = lambda: back("aboutUsWindow"))
+	back_button.place(x=150, y=690) 
 	aboutUsWindow.mainloop()

@@ -71,5 +71,8 @@ def showContactUsWindow():
 	imagelabel4 = Label(contactUsWindow, image=imagenew4)
 	imagelabel4.place(x=300, y=650)
 
+	back_button = Button(contactUsWindow, text="Back", bg="black", fg="#febe53", font=("aerial", 13, "italic"), command = back)
+	back_button.place(x=150, y=690) 
+
 	contactUsWindow.mainloop()
 
