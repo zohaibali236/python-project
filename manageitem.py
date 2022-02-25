@@ -3,9 +3,6 @@ from tkinter import ttk
 from tkinter import messagebox
 import pyodbc
 
-
-
-
 def back():
 	m1.destroy()
 	from cpanel import showCpanel
@@ -32,8 +29,7 @@ def display():
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur4 = dbHandle.cursor()
-	print(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
-	cur4.execute(f"SELECT pid,pname,pquantity,price FROM shopdata WHERE category='{val}'")
+	cur4.execute(f"SELECT * FROM `{val}`")
 	
 	for row in product_list.get_children():
 		product_list.delete(row)
@@ -65,9 +61,8 @@ def add():
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur1 = dbHandle.cursor()
-	global val
-	cur1.execute(f"insert into shopdata(pid,pname,pquantity,price,category) "
-				f"values('{var_id.get()}','{var_name.get()}','{var_quantity.get()}','{var_price.get()}','{val}')")
+	cur1.execute(f"insert into {val}(id,name,quantity,price) "
+				f"values({var_id.get()},'{var_name.get()}',{var_quantity.get()},{var_price.get()})")
 
 	dbHandle.commit()
 	dbHandle.close()
@@ -79,8 +74,8 @@ def edit():
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur2 = dbHandle.cursor()
-	cur2.execute(f"update shopdata set pname='{var_name.get()}',"
-				f" pquantity='{var_quantity.get()}', price='{var_price.get()}' where pid='{var_id.get()}'")
+	cur2.execute(f"update `{val}` set name='{var_name.get()}',"
+				f" quantity={var_quantity.get()}, price={var_price.get()} where id={var_id.get()}")
 	dbHandle.commit()
 	dbHandle.close()
 	display()
@@ -91,7 +86,7 @@ def delete():
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur3 = dbHandle.cursor()
-	cur3.execute(f"delete from shopdata where pid='{var_id.get()}' AND category='{val}'")
+	cur3.execute(f"delete from `{val}` where id={var_id.get()}")
 	dbHandle.commit()
 	dbHandle.close()
 	display()
@@ -117,7 +112,7 @@ def showItemManage():
 	m1.resizable(0,0)
 
 	global var_id, var_name, var_price, var_quantity
-	var_id = StringVar()
+	var_id = IntVar()
 	var_name = StringVar()
 	var_quantity= IntVar()
 	var_price = IntVar()

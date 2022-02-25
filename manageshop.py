@@ -2,10 +2,6 @@ from tkinter import*
 from tkinter import ttk
 from tkinter import messagebox
 import pyodbc
-
-
-
-
    
 def back():
 	manageShopWindow.destroy()
@@ -26,32 +22,56 @@ def add():
 							  r'DBQ=.\shopping mall.accdb;')
 
 	cur1 = dbHandle.cursor()
-	cur1.execute(f"INSERT INTO shops (sID, sName, sLoc, sRent) VALUES('{shopID.get()}', '{shopName.get()}', '{shopRent.get()}', '{shopLoc.get()}')")
-	dbHandle.commit()
-	dbHandle.close()
-	display()
-	messagebox.showinfo("Information", f"{cur1.rowcount} new shop added")
+	try:
+		cur1.execute(f"INSERT INTO shops (sID, sName, sLoc, sRent) VALUES({shopID.get()}, '{shopName.get()}', '{shopLoc.get()}', {shopRent.get()})")
+		rowcount = cur1.rowcount
+		cur1.execute(f"CREATE TABLE `{shopName.get()}` ( \
+     					`id` int,\
+     					`name` varchar, \
+     					`quantity`int, \
+						`price` int,\
+     					PRIMARY KEY (`id`))")
+	except pyodbc.Error as e:
+		print(e)
+		messagebox.showerror("Error!", "Shop Already exists")
+	else:
+		dbHandle.commit()
+		dbHandle.close()
+		display()
+		return messagebox.showinfo("Information", f"{rowcount} new shop added")
 
 def updateForEdit(_):
 	current = shops.focus()
 	currentItem = shops.item(current)
 	currentItem = currentItem["values"]
 
+	print(currentItem)
+
 	shopID.set(currentItem[0])
 	shopName.set(currentItem[1])
 	shopLoc.set(currentItem[2])
 	shopRent.set(currentItem[3])
 
+	global oldID, oldName, oldLoc, oldRent
+	oldID = shopID.get()
+	oldName = shopName.get()
+	oldLoc = shopLoc.get()
+	oldRent = shopRent.get()
+
 def edit():
    dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
    cur2 = dbHandle.cursor()
-   q = f"update shops set sName='{shopName.get()}', sLoc='{shopLoc.get()}', sRent='{shopRent.get()}' where sID='{shopID.get()}'"
-   cur2.execute(q)   
+   print(shopLoc.get())
+   cur2.execute(f"update shops set sName='{shopName.get()}', sLoc='{shopLoc.get()}', sRent={shopRent.get()} where sID={shopID.get()}")
+   rowcount = cur2.rowcount
+   cur2.execute(f"SELECT * INTO `{shopName.get()}` FROM `{oldName}`")
+   cur2.execute(f"ALTER TABLE `{shopName.get()}` ADD PRIMARY KEY(id)")
+   cur2.execute(f"DROP TABLE `{oldName}`")
    dbHandle.commit()
    dbHandle.close()
    display()
-   messagebox.showinfo("Information", f"{cur2.rowcount} shop updated")
+   messagebox.showinfo("Information", f"{rowcount} shop updated")
   
   
 	  
@@ -60,14 +80,23 @@ def delete():
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur3 = dbHandle.cursor()
-	cur3.execute(f"DELETE FROM shops WHERE sID = '{shopID.get()}'")
+	cur3.execute(f"SELECT sName from shops WHERE sID = {shopID.get()}")
+	name = cur3.fetchone()
+	cur3.execute(f"DELETE FROM shops WHERE sID = {shopID.get()}")
+	rowcount = cur3.rowcount
+	cur3.execute(f"DROP TABLE `{name[0]}`")
 	dbHandle.commit()
 	dbHandle.close()
 	display()
-	messagebox.showinfo("Information", f"{cur3.rowcount} shop deleted")
+	messagebox.showinfo("Information", f"{rowcount} shop deleted")
    
 
 def display():
+	shopID.set("")
+	shopName.set("")
+	shopRent.set("")
+	shopLoc.set("")
+
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur4 = dbHandle.cursor()
@@ -94,12 +123,6 @@ def display():
 	shops.tag_configure("odd", foreground="black", background="white")
 	dbHandle.close()
 
-	shopID.set("")
-	shopName.set("")
-	shopRent.set("")
-	shopLoc.set("")
-
-
 def showManageShop():
 	global manageShopWindow
 	manageShopWindow = Tk()
@@ -111,9 +134,9 @@ def showManageShop():
 
 	global shopID, shopName, shopRent, shopLoc
 
-	shopID = StringVar()
+	shopID = IntVar()
 	shopName = StringVar()
-	shopRent= StringVar()
+	shopRent= IntVar()
 	shopLoc = StringVar()
 
 	orange_frame = Frame(manageShopWindow, bg="#febe53", width=1536, height=864)
