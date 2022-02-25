@@ -179,7 +179,8 @@ def showManageShop():
 	display_button.place(x=850, y=270)
 	shops_label.place(x=475, y=350)
 	back_button.place(x=150, y=690)
-   
+
+  
 	shops.bind("<Double-Button-1>", updateForEdit)
 
 	manageShopWindow.mainloop()
