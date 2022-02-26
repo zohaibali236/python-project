@@ -32,7 +32,7 @@ def Showhomepage():
 	homepagewindow.state('zoomed')
 	homepagewindow.resizable(0,0)
 	homepagewindow.iconbitmap('.\images\icon_img.ico')
-	image = Image.open(r"images\title (5).jpg")
+	image = Image.open(r"images\title (1).jpg")
 	imagenew = ImageTk.PhotoImage(image)
 	imagelabel = Label(homepagewindow, image=imagenew)
 	imagelabel.place(x=0,y=0)

@@ -32,6 +32,8 @@ def display():
 							  r'DBQ=.\shopping mall.accdb;')
 	cur4 = dbHandle.cursor()
 	cur4.execute(f"SELECT * FROM `{val}`")
+
+
 	
 	for row in product_list.get_children():
 		product_list.delete(row)
