@@ -14,16 +14,18 @@ def logout():
    ShowLoginPage()
 
 def search(event):
-	global val
-	val = event.widget.get()
+    global val
+    val = event.widget.get()
+    if val == "":
+        combo_box['value'] = categories
+    else:
+        data=[]
+        for categ in categories:
+            if val.lower() in categ.lower():
+                data.append(categ)
+        combo_box['value'] = data
 
-	if val == "":
-		combo_box['value'] = categories
-	else:
-		for categ in categories:
-			if val.lower() in categ.lower():
-				combo_box['value'] = categ
-				break
+				
 
 def display():
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
