@@ -52,11 +52,10 @@ def updateForEdit(_):
 	shopLoc.set(currentItem[2])
 	shopRent.set(currentItem[3])
 
-	global oldID, oldName, oldLoc, oldRent
-	oldID = shopID.get()
+	global oldName
+
 	oldName = shopName.get()
-	oldLoc = shopLoc.get()
-	oldRent = shopRent.get()
+
 
 def edit():
    dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
@@ -96,6 +95,7 @@ def display():
 	shopName.set("")
 	shopRent.set("")
 	shopLoc.set("")
+	
 
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')

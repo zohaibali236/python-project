@@ -134,7 +134,7 @@ def showItemManage():
 	name = Label(white_frame, text="NAME", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
 	quantity = Label(white_frame, text="QUANTITY", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
 	price = Label(white_frame, text="PRICE", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
-	category = Label(white_frame, text="CATEGORY", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
+	category = Label(white_frame, text="SHOP", bg="white", fg="#febe53", font=("aerial", 15, "bold"))
 	product_lis = Label(white_frame, text="PRODUCTS LIST", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
 
 
