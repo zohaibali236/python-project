@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import pyodbc
 
+
 def back():
 	m1.destroy()
 	from cpanel import showCpanel
@@ -25,16 +26,16 @@ def search(event):
                 data.append(categ)
         combo_box['value'] = data
 
-				
 
 def display():
-	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-							  r'DBQ=.\shopping mall.accdb;')
-	cur4 = dbHandle.cursor()
-	cur4.execute(f"SELECT * FROM `{val}`")
-
-
-	
+	try:
+		dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+								r'DBQ=.\shopping mall.accdb;')
+		cur4 = dbHandle.cursor()
+		cur4.execute(f"SELECT * FROM `{val}`")
+	except NameError:
+		return messagebox.showerror("Error!", "Please select a shop")
+		
 	for row in product_list.get_children():
 		product_list.delete(row)
 	
@@ -56,12 +57,14 @@ def display():
 	product_list.tag_configure("odd", foreground="black", background="white")
 	dbHandle.close()
 
-	var_id.set("")
+	var_id.set(0)
 	var_name.set("")
-	var_quantity.set("")
-	var_price.set("")
+	var_quantity.set(0)
+	var_price.set(0)
 
 def add():
+	if(var_id.get() == 0 or var_name.get() == "" or var_price.get() == 0 or var_quantity.get() == 0): return messagebox.showerror("Error!", "fields cannot be empty")
+
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur1 = dbHandle.cursor()
@@ -75,6 +78,7 @@ def add():
 
 
 def edit():
+	if(var_id.get() == 0 or var_name.get() == "" or var_price.get() == 0 or var_quantity.get() == 0): return messagebox.showerror("Error!", "fields cannot be empty")
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur2 = dbHandle.cursor()
@@ -87,6 +91,7 @@ def edit():
 
 
 def delete():
+	if(var_id.get() == 0): return messagebox.showerror("Error!", "ID cannot be empty")
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur3 = dbHandle.cursor()
@@ -101,10 +106,11 @@ def updateForEdit(_):
 	currentItem = product_list.item(current)
 	currentItem = currentItem["values"]
 
-	var_id.set(currentItem[0])
-	var_name.set(currentItem[1])
-	var_quantity.set(currentItem[2])
-	var_price.set(currentItem[3])
+	if(current != ""):
+		var_id.set(currentItem[0])
+		var_name.set(currentItem[1])
+		var_quantity.set(currentItem[2])
+		var_price.set(currentItem[3])
 
 def showItemManage():
 	global m1
@@ -138,11 +144,8 @@ def showItemManage():
 	product_lis = Label(white_frame, text="PRODUCTS LIST", bg="white", fg="#febe53", font=("aerial", 25, "bold"))
 
 
-	try:
-		dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 								  r'DBQ=.\shopping mall.accdb;')
-	except Exception as e:
-		print(e)
 	# creating combo box
 	cur = dbHandle.cursor()
 	cur.execute("select sName from shops")

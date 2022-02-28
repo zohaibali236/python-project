@@ -15,7 +15,7 @@ def logout():
 	ShowLoginPage()
 
 def add():
-	if(shopName.get() == "" or shopRent.get() == "" or shopLoc.get() == ""):
+	if(shopName.get() == "" or shopRent.get() == 0 or shopLoc.get() == "" or shopID.get() == 0):
 		return messagebox.showerror("Error!", "Fields cannot be empty")
 	
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
@@ -45,12 +45,11 @@ def updateForEdit(_):
 	currentItem = shops.item(current)
 	currentItem = currentItem["values"]
 
-	print(currentItem)
-
-	shopID.set(currentItem[0])
-	shopName.set(currentItem[1])
-	shopLoc.set(currentItem[2])
-	shopRent.set(currentItem[3])
+	if(current != ""):
+		shopID.set(currentItem[0])
+		shopName.set(currentItem[1])
+		shopLoc.set(currentItem[2])
+		shopRent.set(currentItem[3])
 
 	global oldName
 
@@ -58,29 +57,33 @@ def updateForEdit(_):
 
 
 def edit():
-   dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
+	if(shopName.get() == "" or shopRent.get() == 0 or shopLoc.get() == "" or shopID.get() == 0):
+		return messagebox.showerror("Error!", "Fields cannot be empty")	
+	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
-   cur2 = dbHandle.cursor()
-   print(shopLoc.get())
-   cur2.execute(f"update shops set sName='{shopName.get()}', sLoc='{shopLoc.get()}', sRent={shopRent.get()} where sID={shopID.get()}")
-   rowcount = cur2.rowcount
-   cur2.execute(f"SELECT * INTO `{shopName.get()}` FROM `{oldName}`")
-   cur2.execute(f"ALTER TABLE `{shopName.get()}` ADD PRIMARY KEY(id)")
-   cur2.execute(f"DROP TABLE `{oldName}`")
-   dbHandle.commit()
-   dbHandle.close()
-   display()
-   messagebox.showinfo("Information", f"{rowcount} shop updated")
+	cur2 = dbHandle.cursor()
+	cur2.execute(f"update shops set sName='{shopName.get()}', sLoc='{shopLoc.get()}', sRent={shopRent.get()} where sID={shopID.get()}")
+	rowcount = cur2.rowcount
+	if(shopName.get() != oldName):
+		cur2.execute(f"SELECT * INTO `{shopName.get()}` FROM `{oldName}`")
+		cur2.execute(f"ALTER TABLE `{shopName.get()}` ADD PRIMARY KEY(id)")
+		cur2.execute(f"DROP TABLE `{oldName}`")
+	dbHandle.commit()
+	dbHandle.close()
+	display()
+	messagebox.showinfo("Information", f"{rowcount} shop updated")
   
   
-	  
+
 def delete():
-	if(shopID.get() == ""): return messagebox.showerror("Error!", "ID cannot be empty")
+	if(shopID.get() == 0): return messagebox.showerror("Error!", "ID cannot be empty")
 	dbHandle = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
 							  r'DBQ=.\shopping mall.accdb;')
 	cur3 = dbHandle.cursor()
 	cur3.execute(f"SELECT sName from shops WHERE sID = {shopID.get()}")
 	name = cur3.fetchone()
+	if(name == None): return messagebox.showerror("Error!", "Invalid ID")
+
 	cur3.execute(f"DELETE FROM shops WHERE sID = {shopID.get()}")
 	rowcount = cur3.rowcount
 	cur3.execute(f"DROP TABLE `{name[0]}`")
@@ -91,9 +94,9 @@ def delete():
    
 
 def display():
-	shopID.set("")
+	shopID.set(0)
 	shopName.set("")
-	shopRent.set("")
+	shopRent.set(0)
 	shopLoc.set("")
 	
 

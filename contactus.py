@@ -6,7 +6,7 @@ import webbrowser
 
 
 
-def mailto(url):
+def openUrl(url):
 	webbrowser.open_new_tab(url)
 
 def back():
@@ -30,19 +30,19 @@ def showContactUsWindow():
 	
 	link = Label(contactUsWindow, text="www.eleganteshoppingmall.com", font=('Helveticabold', 15), fg="blue", cursor="hand2")
 	link.place(x=520,y=410)
-	link.bind("<Button-1>", lambda _: mailto("http://www.eleganteshoppingmall.com"))
+	link.bind("<Button-1>", lambda _: openUrl("http://www.eleganteshoppingmall.com"))
 
 	link = Label(contactUsWindow, text="mahnoorwaseem@gmail.com", font=('Helveticabold', 15), fg="blue", cursor="hand2")
 	link.place(x=520,y=600)
-	link.bind("<Button-1>", lambda _: mailto("mailto:mahnoorwaseem@gmail.com"))
+	link.bind("<Button-1>", lambda _: openUrl("openUrl:mahnoorwaseem@gmail.com"))
 
 	link = Label(contactUsWindow, text="zohaib.ali236@gmail.com", font=('Helveticabold', 17), fg="blue", cursor="hand2")
 	link.place(x=520,y=645)
-	link.bind("<Button-1>", lambda _: mailto("mailto:zohaib.ali236@gmail.com"))
+	link.bind("<Button-1>", lambda _: openUrl("openUrl:zohaib.ali236@gmail.com"))
 
 	link = Label(contactUsWindow, text="jazebjaved52@gmail.com", font=('Helveticabold', 17), fg="blue", cursor="hand2")
 	link.place(x=520,y=693)
-	link.bind("<Button-1>", lambda _: mailto("mailto:jazebjaved52@gmail.com"))
+	link.bind("<Button-1>", lambda _: openUrl("openUrl:jazebjaved52@gmail.com"))
 
 	l1 = Label(contactUsWindow,text='Zaibun Nissa Street, Saddar, Karachi, Pakistan',font=('calibri',15,"bold"),fg='black')
 	l1.place(x=520,y=325)

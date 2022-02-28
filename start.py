@@ -1,6 +1,9 @@
 """
     Project Name:- Mall management system
-    Developed by: 
+    Developed by:-
+                Mahnoor Waseem (SE-21017)
+                Jazeb Javed (SE-21030)
+                Zohaib Ali (SE-21043)
     Supervised by: Engr.Asma Khan
 """
 
