@@ -10,21 +10,21 @@ def back():
 	showCpanel()
 
 def logout():
-   m1.destroy()
-   from loginpage import ShowLoginPage
-   ShowLoginPage()
+	m1.destroy()
+	from loginpage import ShowLoginPage
+	ShowLoginPage()
 
 def search(event):
-    global val
-    val = event.widget.get()
-    if val == "":
-        combo_box['value'] = categories
-    else:
-        data=[]
-        for categ in categories:
-            if val.lower() in categ.lower():
-                data.append(categ)
-        combo_box['value'] = data
+	global val
+	val = event.widget.get()
+	if val == "":
+		combo_box['value'] = categories
+	else:
+		data=[]
+		for categ in categories:
+			if val.lower() in categ.lower():
+				data.append(categ)
+			combo_box['value'] = data
 
 
 def display():
