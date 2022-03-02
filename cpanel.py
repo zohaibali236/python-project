@@ -1,8 +1,6 @@
 from tkinter import *
 
 
-
-
 def manageShopInit():
 	Cpanel.destroy()
 	from manageshop import showManageShop

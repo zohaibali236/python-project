@@ -2,7 +2,8 @@ from tkinter import*
 from tkinter import ttk
 from tkinter import messagebox
 import pyodbc
-   
+
+
 def back():
 	manageShopWindow.destroy()
 	from cpanel import showCpanel
@@ -13,6 +14,7 @@ def logout():
 	manageShopWindow.destroy()
 	from loginpage import ShowLoginPage
 	ShowLoginPage()
+
 
 def add():
 	if(shopName.get() == "" or shopRent.get() == 0 or shopLoc.get() == "" or shopID.get() == 0):
@@ -39,6 +41,7 @@ def add():
 		dbHandle.close()
 		display()
 		return messagebox.showinfo("Information", f"{rowcount} new shop added")
+
 
 def updateForEdit(_):
 	current = shops.focus()
@@ -125,6 +128,7 @@ def display():
 	shops.tag_configure("even", foreground="black", background="gray82")
 	shops.tag_configure("odd", foreground="black", background="white")
 	dbHandle.close()
+
 
 def showManageShop():
 	global manageShopWindow

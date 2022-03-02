@@ -9,10 +9,12 @@ def back():
 	from cpanel import showCpanel
 	showCpanel()
 
+
 def logout():
 	m1.destroy()
 	from loginpage import ShowLoginPage
 	ShowLoginPage()
+
 
 def search(event):
 	global val
@@ -62,6 +64,7 @@ def display():
 	var_quantity.set(0)
 	var_price.set(0)
 
+
 def add():
 	if(var_id.get() == 0 or var_name.get() == "" or var_price.get() == 0 or var_quantity.get() == 0): return messagebox.showerror("Error!", "fields cannot be empty")
 
@@ -101,6 +104,7 @@ def delete():
 	display()
 	messagebox.showinfo("Information", f"{cur3.rowcount} Row deleted")
 
+
 def updateForEdit(_):
 	current = product_list.focus()
 	currentItem = product_list.item(current)
@@ -111,6 +115,7 @@ def updateForEdit(_):
 		var_name.set(currentItem[1])
 		var_quantity.set(currentItem[2])
 		var_price.set(currentItem[3])
+
 
 def showItemManage():
 	global m1

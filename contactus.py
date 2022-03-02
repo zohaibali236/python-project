@@ -3,9 +3,6 @@ from PIL import Image , ImageTk
 import webbrowser
 
 
-
-
-
 def openUrl(url):
 	webbrowser.open_new_tab(url)
 

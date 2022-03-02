@@ -5,8 +5,6 @@ from PIL import ImageTk
 import pyodbc
 
 
-
-
 def back():
 	loginPage.destroy()
 	from homepage import Showhomepage
